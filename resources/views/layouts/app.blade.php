@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -318,13 +318,13 @@
                             <a href="shop.html" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="cart.html" class="navigation__link">Cart</a>
+                            <a href="cart.html" class="navigation__link">Giỏ Hàng</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">About</a>
+                            <a href="about.html" class="navigation__link">Thông Tin</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contact</a>
+                            <a href="contact.html" class="navigation__link">Liên Hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -407,13 +407,13 @@
                             <a href="shop.html" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="cart.html" class="navigation__link">Cart</a>
+                            <a href="cart.html" class="navigation__link">Giỏ Hàng</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">About</a>
+                            <a href="about.html" class="navigation__link">Thông Tin</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Contact</a>
+                            <a href="contact.html" class="navigation__link">Liên Hệ</a>
                         </li>
                     </ul>
                 </nav>
@@ -522,9 +522,9 @@
                                 class="logo__image d-block" />
                         </a>
                     </div>
-                    <p class="footer-address">123 Beach Avenue, Surfside City, CA 00000</p>
-                    <p class="m-0"><strong class="fw-medium">contact@surfsidemedia.in</strong></p>
-                    <p><strong class="fw-medium">+1 000-000-0000</strong></p>
+                    <p class="footer-address">Thành Phố Hồ Chí Minh , Paster District 1 </p>
+                    <p class="m-0"><strong class="fw-medium">Vu73194@gmail.com</strong></p>
+                    <p><strong class="fw-medium">0933924075</strong></p>
 
                     <ul class="social-links list-unstyled d-flex flex-wrap mb-0">
                         <li>
