@@ -395,10 +395,10 @@
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
                                                 <span class="image">
-                                                    <img src="images/avatar/user-1.png" alt="">
+                                                    <img src="images/avatar/pngtree-vector-businessman-icon-png-image_4869955.jpg" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Kristin Watson</span>
+                                                    <span class="body-title mb-2">Vu Viet Thang</span>
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>
