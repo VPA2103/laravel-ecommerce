@@ -401,7 +401,7 @@
                 <nav class="navigation">
                     <ul class="navigation__list list-unstyled d-flex">
                         <li class="navigation__item">
-                            <a href="{{route('home.index')}}" class="navigation__link">Home</a>
+                            <a href="{{route('home.index')}}" class="navigation__link">Trang Chủ</a>
                         </li>
                         <li class="navigation__item">
                             <a href="shop.html" class="navigation__link">Shop</a>
@@ -522,7 +522,7 @@
                                 class="logo__image d-block" />
                         </a>
                     </div>
-                    <p class="footer-address">Thành Phố Hồ Chí Minh , Paster District 1 </p>
+                    <p class="footer-address">65 Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1, TP. HCM</p>
                     <p class="m-0"><strong class="fw-medium">Vu73194@gmail.com</strong></p>
                     <p><strong class="fw-medium">0933924075</strong></p>
 
@@ -530,7 +530,7 @@
                         <li>
                             <a href="#" class="footer__social-link d-block">
                                 <svg class="svg-icon svg-icon_facebook" width="9" height="15" viewBox="0 0 9 15"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                    xmlns="https://www.facebook.com/Minhlathangg/">
                                     <use href="#icon_facebook" />
                                 </svg>
                             </a>
@@ -572,57 +572,53 @@
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Company</h6>
+                    <h6 class="sub-menu__title text-uppercase">Công Ty</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">About Us</a>
+                        <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">Về Chúng Tôi</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Nghề nghiệp</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Chi Nhánh</a></li>
                         <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a>
                         </li>
-                        <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Contact
-                                Us</a></li>
+                        <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Liên Hệ Với Chúng Tôi</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Shop</h6>
+                    <h6 class="sub-menu__title text-uppercase">Cửa Hàng</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New
-                                Arrivals</a></li>
-                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
+                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">Sản Phẩm Mới</a></li>
+                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Phụ Kiện</a>
                         </li>
-                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
-                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
-                        <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Shop All</a>
+                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Nam Giới</a></li>
+                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Phụ Nữ</a></li>
+                        <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Mua Sắm Tất Cả</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Help</h6>
+                    <h6 class="sub-menu__title text-uppercase">Trợ Giúp</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Hệ Thống Khách Hàng</a>
                         </li>
-                        <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">My
-                                Account</a>
+                        <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">Trang Cá Nhân</a>
                         </li>
-                        <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a
-                                Store</a>
+                        <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Tìm Cửa Hàng</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Pháp Lý & Quyền Riêng Tư</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Thẻ Quà Tặng</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Categories</h6>
+                    <h6 class="sub-menu__title text-uppercase">Thể Loại</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shop All</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Áo Thun</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Quần Jeans</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Giày</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Cặp</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Tất Cả Sản Phẩm</a></li>
                     </ul>
                 </div>
             </div>
