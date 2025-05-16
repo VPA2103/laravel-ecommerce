@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 
 
@@ -45,10 +45,41 @@ class AdminController extends Controller
         $brand->save();
         return redirect()->route('admin.brands')->with('success','Brand Added Successfully');
     }
+    public function brand_edit($id){
+        $brand=Brand::find($id);
+        return view('admin.brand-edit',compact('brand'));
+    }
+    public function brand_update(Request $request){
+    $request->validate([
+        'name' => 'required',
+        'slug' => 'required|unique:brands,slug,' . $request->id,  // Bỏ qua bản ghi hiện tại khi check unique
+        'image' => 'mimes:png,jpg,jpeg|max:2048'
+    ]);
 
+    $brand = Brand::find($request->id);  // Lấy brand cần update
+
+    $brand->name = $request->name;
+    $brand->slug = Str::slug($request->name);
+
+    if ($request->hasFile('image')) {
+        if (File::exists(public_path('uploads/brands/' . $brand->image))) {
+            File::delete(public_path('uploads/brands/' . $brand->image));
+        }
+
+        $image = $request->file('image');
+        $file_extention = $image->extension();
+        $file_name = Carbon::now()->timestamp . '.' . $file_extention;
+        $this->GenerateBrandThumbailImage($image, $file_name);
+        $brand->image = $file_name;
+    }
+
+    $brand->save();
+
+    return redirect()->route('admin.brands')->with('success', 'Brand Updated Successfully');
+    }
     public function GenerateBrandThumbailImage($image, $imageName)
     {
-        $destinationPath = public_path('images/brands');
+        $destinationPath = public_path('uploads/brands');
 
         // Tạo thư mục nếu chưa tồn tại
         if (!file_exists($destinationPath)) {
