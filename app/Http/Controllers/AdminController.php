@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -225,5 +225,11 @@ class AdminController extends Controller
         }
         $category->delete();
         return redirect()->route('admin.categories')->with('success', 'Category Deleted Successfully');
+    }
+
+    public function products()
+    {
+        $products = Product::orderBy('create_at','DESC')->paginate(10);
+        return view('admin.products',compact('products'));
     }
 }
