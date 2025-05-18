@@ -12,14 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // Tự động tăng ID
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('image')->nullable();
-            $table->string('parent_id')->nnullable();
+            $table->unsignedBigInteger('parent_id')->nullable(); // đúng kiểu dữ liệu
             $table->timestamps();
+
+            // Nếu muốn ràng buộc khóa ngoại (tùy chọn)
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
+
 
     /**
      * Reverse the migrations.
