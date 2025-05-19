@@ -91,7 +91,9 @@
                                             <i class="icon-edit-3"></i>
                                         </div>
                                     </a>
-                                    <form action="#" method="POST">
+                                    <form action="{{route('admin.product.delete', $product->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <div class="item text-danger delete">
                                             <i class="icon-trash-2"></i>
                                         </div>
@@ -107,9 +109,31 @@
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
 
-            {{ $products->links('pagination::bootstrap-5') }}
+                {{ $products->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(function() {
+        $('.delete').on('click', function(e) {
+            e.preventDefault();
+            var form = $(this).closest('form');
+            swal({
+                title: 'Are you sure?',
+                text: "You want to delete this product?",
+                type: 'warning',
+                buttons: ["Cancel", "Yes"],
+                confirmButtonColor: '#dc3545',
+            }).then(function(result) {
+                if (result) {
+                    form.submit();
+                }
+            })
+        })
+    })
+</script>
+@endpush

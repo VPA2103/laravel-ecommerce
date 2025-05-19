@@ -295,5 +295,10 @@ class AdminController extends Controller
             $constraint->aspectRatio();
         })->save($destinationPathThumbnail . '/' . $imageName);
     }
-
+    public function product_delete($id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('admin.products')->with('success', 'Product Deleted Successfully');
+    }
 }

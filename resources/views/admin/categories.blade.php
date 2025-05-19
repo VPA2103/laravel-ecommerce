@@ -103,7 +103,7 @@
             var form= $(this).closest('form');
             swal({
                 title: 'Are you sure?',
-                text: "You want to delete this$categories?",
+                text: "You want to delete this category?",
                 type: 'warning',
                 buttons: ["Cancel","Yes"],
                 confirmButtonColor: '#dc3545',
