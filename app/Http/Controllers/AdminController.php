@@ -81,36 +81,20 @@ class AdminController extends Controller
 
         return redirect()->route('admin.brands')->with('success', 'Brand Updated Successfully');
     }
+    
     public function GenerateBrandThumbailImage($image, $imageName)
     {
         $destinationPath = public_path('uploads/brands');
-
-        // Tạo thư mục nếu chưa tồn tại
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0755, true);
+        
+        // Create directory if it doesn't exist
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true);
         }
 
-        // Xử lý ảnh (tương thích cả v2.x và v3.x)
-        try {
-            // Cách 1: Dùng make() (cho v2.x)
-            $img = Image::make($image->getRealPath());
-
-            // Cách 2: Dùng read() (cho v3.x) - bỏ comment nếu dùng v3.x
-            // $img = Image::read($image->getRealPath());
-
-            // Resize và crop ảnh
-            $img->fit(124, 124, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize(); // Ngăn ảnh phóng to nếu nhỏ hơn kích thước đích
-            });
-
-            // Lưu ảnh
-            $img->save($destinationPath . '/' . $imageName);
-        } catch (\Exception $e) {
-            // Xử lý lỗi nếu có
-            logger()->error('Image processing failed: ' . $e->getMessage());
-            throw $e; // Hoặc return false tùy logic của bạn
-        }
+        $img = Image::make($image->path());
+        $img->fit(124,124, function($constraint)  {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $imageName);
     }
 
     public function brand_delete($id)
@@ -155,32 +139,15 @@ class AdminController extends Controller
     {
         $destinationPath = public_path('uploads/categories');
 
-        // Tạo thư mục nếu chưa tồn tại
-        if (!file_exists($destinationPath)) {
-            mkdir($destinationPath, 0755, true);
+        // Create directory if it doesn't exist
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true);
         }
 
-        // Xử lý ảnh (tương thích cả v2.x và v3.x)
-        try {
-            // Cách 1: Dùng make() (cho v2.x)
-            $img = Image::make($image->getRealPath());
-
-            // Cách 2: Dùng read() (cho v3.x) - bỏ comment nếu dùng v3.x
-            // $img = Image::read($image->getRealPath());
-
-            // Resize và crop ảnh
-            $img->fit(124, 124, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize(); // Ngăn ảnh phóng to nếu nhỏ hơn kích thước đích
-            });
-
-            // Lưu ảnh
-            $img->save($destinationPath . '/' . $imageName);
-        } catch (\Exception $e) {
-            // Xử lý lỗi nếu có
-            logger()->error('Image processing failed: ' . $e->getMessage());
-            throw $e; // Hoặc return false tùy logic của bạn
-        }
+        $img = Image::make($image->path());
+        $img->fit(124,124, function($constraint)  {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $imageName);
     }
 
     public function category_edit($id)
@@ -229,7 +196,104 @@ class AdminController extends Controller
 
     public function products()
     {
-        $products = Product::orderBy('create_at','DESC')->paginate(10);
+        $products = Product::orderBy('created_at','DESC')->paginate(10);
         return view('admin.products',compact('products'));
     }
+    public function add_product()
+    {
+        $categories = Category::select('id','name')->orderBy('name','ASC')->get();
+        $brands = Brand::select('id','name')->orderBy('name','ASC')->get();
+        return view('admin.product-add',compact('categories','brands'));
+    }
+    public function product_store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:products,slug',
+            'short_description' => 'required',
+            'description' => 'required',
+            'regular_price' => 'required',
+            'sale_price' => 'required',
+            'SKU' => 'required',
+            'stock_status' => 'required',
+            'featured' => 'required',
+            'quantity' => 'required',
+            'image' => 'mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
+            'brand_id' => 'required',
+        ]);
+        $product = new Product();
+
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name) . '-' . time();
+        $product->short_description = $request->short_description;
+        $product->description = $request->description;
+        $product->regular_price = $request->regular_price;
+        $product->sale_price = $request->sale_price;
+        $product->SKU = $request->SKU;
+        $product->stock_status = $request->stock_status;
+        $product->featured = $request->featured;
+        $product->quantity = $request->quantity;
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+
+
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = Carbon::now()->timestamp . '.' . $image->extension();
+            $this->GenerateProductThumbailImage($image, $imageName);
+            $product->image = $imageName;
+        }
+        
+        $gallery_arr = array();
+        $gallery_images ="";
+        $count = 1;
+        
+        if($request->hasFile('images')){
+            $files = $request->file('images');
+
+            foreach($files as $file){
+
+                $extension = $file->getClientOriginalExtension();
+                $gcheck = in_array($extension,['png','jpg','jpeg']);
+
+                if($gcheck){
+
+                    $gfileName = Carbon::now()->timestamp . '_' . $count . '.' . $extension;
+                    $this->GenerateProductThumbailImage($file, $gfileName);
+                    array_push($gallery_arr,$gfileName);
+                    $count = $count + 1;
+                }
+            }
+            $gallery_images = implode(',',$gallery_arr);
+        }
+        $product->image = $gallery_images;
+        $product->save();
+        return redirect()->route('admin.products')->with('success','Product has been added Successfully!');
+    }
+    public function GenerateProductThumbailImage($image, $imageName)
+    {
+        $destinationPathThumbnail = public_path('uploads/products/thumbnails');
+
+        $destinationPath = public_path('uploads/products');
+
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true);
+        }
+        if (!File::exists($destinationPathThumbnail)) {
+            File::makeDirectory($destinationPathThumbnail, 0777, true);
+        }
+
+        $img = Image::make($image->path());
+
+        $img->fit(540, 689, function($constraint)  {
+            $constraint->aspectRatio();
+        })->save($destinationPath . '/' . $imageName);
+
+        $img->fit(104, 104, function($constraint)  {
+            $constraint->aspectRatio();
+        })->save($destinationPathThumbnail . '/' . $imageName);
+    }
+
 }
