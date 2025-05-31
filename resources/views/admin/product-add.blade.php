@@ -246,7 +246,9 @@
 
 <script>
     $(function() {
+
         $('#myFile').on('change', function(e) {
+            const photoInp = $('#myFile');
             const [file] = this.files;
             if (file) {
                 $("#imgpreview img").attr("src", URL.createObjectURL(file));
@@ -255,13 +257,14 @@
         });
 
         $('#gFile').on('change', function(e) {
-            const gphoto = this.files;
-            $.each(gphoto, function(key, val) {
-                $("#galUpload").prepend(`<div class="item"><img src="${URL.createObjectURL(val)}" alt=""></div>`);
+            const photoInp = $('#gFile');
+            const gphotos = this.files;
+            $.each(gphotos, function(key, val) {
+                $("#galUpload").prepend(`<div class="item gitems"><img src="${URL.createObjectURL(val)}"/></div>`);
             });
         });
 
-        $("input[name='name']").on('keyup', function() {
+        $("input[name='name']").on('change', function() {
             $("input[name='slug']").val(StringToSlug($(this).val()));
         });
     });
