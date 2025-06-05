@@ -438,12 +438,16 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="login.html" class="user-item">
-                                                    <div class="icon">
-                                                        <i class="icon-log-out"></i>
-                                                    </div>
-                                                    <div class="body-title-2">Log out</div>
+                                                <a href="{{ route('logout') }}"
+                                                    class="user-item"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <div class="icon"><i class="icon-log-out"></i></div>
+                                                        <div class="body-title-2"> Log Out </div>
                                                 </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
                                             </li>
                                         </ul>
                                     </div>
@@ -453,10 +457,7 @@
                         </div>
                     </div>
                     <div class="main-content">
-                        @yield('content')
-                       
-
-
+                        @yield('content')                       
                         <div class="bottom-page">
                             <div class="body-text">Copyright © 2024 SurfsideMedia</div>
                         </div>

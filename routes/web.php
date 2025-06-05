@@ -8,9 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\ShopController;
+
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 Route::middleware(['auth'])->group(function(){
      Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
