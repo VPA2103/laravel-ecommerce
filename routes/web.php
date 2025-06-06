@@ -19,6 +19,9 @@ Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->na
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
+Route::delete('/cart/remove/{rowId}',[CartController::class, 'remove_item'])->name('cart.item.remove');
+Route::delete('/cart/clear',[CartController::class, 'empty_cart'])->name('cart.empty');
+
 
 Route::middleware(['auth'])->group(function(){
      Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
