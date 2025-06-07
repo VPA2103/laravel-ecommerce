@@ -19,6 +19,9 @@ Route::get('/shop/{product_slug}',[ShopController::class,'product_details'])->na
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart.add');
+Route::put('cart/inscrease-quantity/{rowId}',[CartController::class, 'increase_cart_quantity'])->name('cart.qty.inscrease');
+Route::put('cart/descrease-quantity/{rowId}', [CartController::class, 'decrease_cart_quantity'])->name('cart.qty.decrease');
+
 
 Route::middleware(['auth'])->group(function(){
      Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
