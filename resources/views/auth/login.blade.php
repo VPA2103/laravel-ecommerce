@@ -40,7 +40,13 @@
                         </div>
 
                         <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
+                            <div class="text-center my-3">
+                            <span class="text-secondary">or</span>
+                        </div>
 
+                        <a href="{{ route('auth.google') }}" class="btn btn-outline-danger w-100 text-uppercase mb-3">
+                            <i class="fab fa-google me-2"></i> Sign in with Google
+                        </a>
                         <div class="customer-option mt-4 text-center">
                             <span class="text-secondary">No account yet?</span>
                             <a href="{{route('register')}}" class="btn-text js-show-register">Create Account</a>
