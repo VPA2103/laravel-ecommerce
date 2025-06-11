@@ -20,9 +20,9 @@
                                 autofocus="">
                             <label for="email">Email address *</label>
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
@@ -33,19 +33,23 @@
                                 autocomplete="current-password">
                             <label for="customerPasswodInput">Password *</label>
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
                         <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
-                            <div class="text-center my-3">
+                        <div class="text-center my-3">
                             <span class="text-secondary">or</span>
                         </div>
 
-                        <a href="{{ route('auth.google') }}" class="btn btn-outline-danger w-100 text-uppercase mb-3">
+                        <!-- <a href="{{ route('auth.google') }}" class="btn btn-danger w-100 text-uppercase text-primary ">
                             <i class="fab fa-google me-2"></i> Sign in with Google
+                        </a> -->
+                        <a href="{{ route('auth.google') }}" class="btn btn-google w-100 text-uppercase mb-3 d-flex align-items-center justify-content-center">
+                            <i class="fab fa-google me-2"></i>
+                            <span>Sign in with Google</span>
                         </a>
                         <div class="customer-option mt-4 text-center">
                             <span class="text-secondary">No account yet?</span>
@@ -57,8 +61,19 @@
         </div>
     </section>
 </main>
+<style>
+    .btn-google {
+        background-color: #c62828 !important;
+        /* Đỏ đậm */
+        color: white !important;
+        border: none;
+    }
 
-
-
+    .btn-google:hover {
+        background-color: #b71c1c !important;
+        /* Đỏ đậm hơn khi hover */
+        color: white !important;
+    }
+</style>
 </div>
 @endsection
