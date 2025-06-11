@@ -11,7 +11,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ShopController;
 
+use App\Http\Controllers\GoogleController;
+
+
+
 Auth::routes();
+
+Route::controller(GoogleController::class)->group(function(){
+     Route::get('/auth/google', 'googlelogin')->name('auth.google');
+     Route::get('/auth/google-callback','googleauthentication')->name('auth.google-callback');
+});
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
