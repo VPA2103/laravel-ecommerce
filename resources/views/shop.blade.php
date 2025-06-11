@@ -28,38 +28,20 @@
                     </h5>
                     <div id="accordion-filter-1" class="accordion-collapse collapse show border-0"
                         aria-labelledby="accordion-heading-1" data-bs-parent="#categories-list">
-                        <div class="accordion-body px-0 pb-0 pt-3">
+                        <div class="accordion-body px-0 pb-0 pt-3 category-list">
                             <ul class="list list-inline mb-0">
+                                @foreach ($categories as $category)
                                 <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Dresses</a>
+                                    <span class="menu-link py-1">
+                                        <input type="checkbox" class="chk-category" name="categories" value="{{ $category->id }}"
+                                            @if(in_array($category->id,explode(',',$f_categories))) checked="checked" @endif />
+                                        {{ $category->name }}
+                                    </span>
+                                    <span class="text-right float-end">{{ $category->products->count() }}</span>
                                 </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Shorts</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Sweatshirts</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Swimwear</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Jackets</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">T-Shirts & Tops</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Jeans</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Trousers</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Men</a>
-                                </li>
-                                <li class="list-item">
-                                    <a href="#" class="menu-link py-1">Jumpers & Cardigans</a>
-                                </li>
+                                @endforeach
+
+
                             </ul>
                         </div>
                     </div>
@@ -152,16 +134,16 @@
                         <div class="search-field multi-select accordion-body px-0 pb-0">
                             <ul class="list list-inline mb-0 brand-list">
                                 @foreach($brands as $brand)
-                                    <li class="list-item">
-                                        <span class="menu-link py-1"> 
-                                            <input type="checkbox" name="brands" value="{{$brand->id}}" class="chk-brand"
+                                <li class="list-item">
+                                    <span class="menu-link py-1">
+                                        <input type="checkbox" name="brands" value="{{$brand->id}}" class="chk-brand"
                                             @if(in_array($brand->id,explode(',',$f_brands))) checked="checked" @endif>
-                                            {{$brand->name}}
-                                        </span>
-                                        <span class="text-right float-end">
-                                            {{$brand->products->count()}}
-                                        </span>
-                                    </li>
+                                        {{$brand->name}}
+                                    </span>
+                                    <span class="text-right float-end">
+                                        {{$brand->products->count()}}
+                                    </span>
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -428,8 +410,10 @@
 <form id="frmfilter" method="GET" action="{{ route('shop.index') }}">
     <input type="hidden" name="page" value="{{ $products->currentPage() }}">
     <input type="hidden" name="size" id="size" value="{{$size}}" />
-    <input type="hidden" name="order" id="order" value="{{ $order }}"/>
-    <input type="hidden" name="brands" id="hdnBrands" >
+    <input type="hidden" name="order" id="order" value="{{ $order }}" />
+    <input type="hidden" name="brands" id="hdnBrands" />
+    <input type="hidden" name="categories" id="hdnCategories" />
+
 </form>
 
 @endsection
@@ -447,19 +431,30 @@
             $("#frmfilter").submit();
         });
 
-        $("input[name='brands']").on("change",function(){
-            var brands="";
-            $("input[name='brands']:checked").each(function(){
-                if(brands=="")
-                {
-                    brands+=$(this).val();
-                }else
-                {
-                    brands+=","+$(this).val();
+        $("input[name='brands']").on("change", function() {
+            var brands = "";
+            $("input[name='brands']:checked").each(function() {
+                if (brands == "") {
+                    brands += $(this).val();
+                } else {
+                    brands += "," + $(this).val();
                 }
             });
-             $("#hdnBrands").val(brands);
-             $("#frmfilter") .submit();  
+            $("#hdnBrands").val(brands);
+            $("#frmfilter").submit();
+        });
+
+        $("input[name='categories']").on("change", function() {
+            var categories = "";
+            $("input[name='categories']:checked").each(function() {
+                if (categories == "") {
+                    categories += $(this).val();
+                } else {
+                    categories += "," + $(this).val();
+                }
+            });
+            $("#hdnCategories").val(categories);
+            $("#frmfilter").submit();
         });
     });
 </script>

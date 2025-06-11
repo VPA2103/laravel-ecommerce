@@ -110,41 +110,44 @@
             @method('DELETE')
             <button class="btn btn-light" type="submit">CLEAR CART</button>
           </form>
+
         </div>
+
       </div>
-    </div>
-    <div class="shopping-cart__totals-wrapper">
-      <div class="sticky-content">
-        <div class="shopping-cart__totals">
-          <h3>Cart Totals</h3>
-          <table class="cart-totals">
-            <tbody>
-              <tr>
-                <th>Subtotal</th>
-                <td>${{Cart::instance('cart')->subtotal()}}</td>
-              </tr>
-              <tr>
-                <th>Shipping</th>
-                <td>Free</td>
-              </tr>
-              <tr>
-                <th>VAT</th>
-                <td>${{Cart::instance('cart')->tax()}}</td>
-              </tr>
-              <tr>
-                <th>Total</th>
-                <td>${{Cart::instance('cart')->total()}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="mobile_fixed-btn_wrapper">
-          <div class="button-wrapper container">
-            <a href="checkout.html" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
+      <div class="shopping-cart__totals-wrapper">
+        <div class="sticky-content">
+          <div class="shopping-cart__totals">
+            <h3>Cart Totals</h3>
+            <table class="cart-totals">
+              <tbody>
+                <tr>
+                  <th>Subtotal</th>
+                  <td>${{Cart::instance('cart')->subtotal()}}</td>
+                </tr>
+                <tr>
+                  <th>Shipping</th>
+                  <td>Free</td>
+                </tr>
+                <tr>
+                  <th>VAT</th>
+                  <td>${{Cart::instance('cart')->tax()}}</td>
+                </tr>
+                <tr>
+                  <th>Total</th>
+                  <td>${{Cart::instance('cart')->total()}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mobile_fixed-btn_wrapper">
+            <div class="button-wrapper container">
+              <a href="checkout.html" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
     @else
     <div class="row">
       <div class="col-md-12 text-center pt-5 bp-5">
