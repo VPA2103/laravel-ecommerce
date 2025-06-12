@@ -44,13 +44,16 @@
                             <span class="text-secondary">or</span>
                         </div>
 
-                        <!-- <a href="{{ route('auth.google') }}" class="btn btn-danger w-100 text-uppercase text-primary ">
-                            <i class="fab fa-google me-2"></i> Sign in with Google
-                        </a> -->
-                        <a href="{{ route('auth.google') }}" class="btn btn-google w-100 text-uppercase mb-3 d-flex align-items-center justify-content-center">
-                            <i class="fab fa-google me-2"></i>
-                            <span>Sign in with Google</span>
-                        </a>
+                        <div class="flex">
+                            <a title="Login with Google" href="{{ route('auth.redirection','google') }}" class="btn btn-google w-100 text-uppercase mb-3 d-flex align-items-center justify-content-center">
+                                <i class="fab fa-google me-2"></i>
+                                <span>Sign in with Google</span>
+                            </a>
+                            <a title="Login with Facebook" href="{{ route('auth.redirection','facebook') }}" class="btn btn-primary btn-facebook">
+                                <i class="fab fa-facebook me-2"></i>
+                                <span>Sign in with Facebook</span>
+                            </a>
+                        </div>
                         <div class="customer-option mt-4 text-center">
                             <span class="text-secondary">No account yet?</span>
                             <a href="{{route('register')}}" class="btn-text js-show-register">Create Account</a>
@@ -64,14 +67,27 @@
 <style>
     .btn-google {
         background-color: #c62828 !important;
-        /* Đỏ đậm */
         color: white !important;
         border: none;
     }
 
     .btn-google:hover {
         background-color: #b71c1c !important;
-        /* Đỏ đậm hơn khi hover */
+        color: white !important;
+    }
+
+    .btn-facebook {
+        background-color: #3b5998 !important;
+        color: white !important;
+        border: none;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        text-transform: uppercase;
+    }
+
+    .btn-facebook:hover {
+        background-color: #344e86 !important;
         color: white !important;
     }
 </style>
