@@ -10,30 +10,42 @@ use Illuminate\Support\Facades\Hash;
 
 class GoogleController extends Controller
 {
-    public function googlelogin() {
-        return Socialite::driver('google')->redirect();
-    }
-    public function googleauthentication()
+    public function authProviderRedirect($provider)
     {
-        try{
-            $googleUser=Socialite::driver('google')->user();
-            $user = User::where('google_id',$googleUser->id)->first();
-            if($user){
-                Auth::login($user);
-                return redirect()->route('home.index');
-            }else{
-                $userdata = User::create([
-                    'name'=>$googleUser->name,
-                    'email'=>$googleUser->email,
-                    'password'=>Hash::make('Password@1234'),
-                    'google_id'=>$googleUser->id
-                ]);
-                if($userdata){
-                    Auth::login($userdata);
+        if ($provider) {
+            return Socialite::driver($provider)->redirect();
+        }
+        abort(404);
+    }
+    public function socialAuthentication($provider)
+    {
+
+        try {
+            if ($provider) {
+
+                $socialUser = Socialite::driver($provider)->user();
+
+                $user = User::where('auth_provider_id', $socialUser->id)->first();
+
+                if ($user) {
+                    Auth::login($user);
+                    return redirect()->route('home.index');
+                } else {
+                    $userdata = User::create([
+                        'name' => $socialUser->name,
+                        'email' => $socialUser->email,
+                        'password' => Hash::make('Password@1234'),
+                        'auth_provider_id' => $socialUser->id,
+                        'auth_provider' => $provider,
+                    ]);
+                    if ($userdata) {
+                        Auth::login($userdata);
+                    }
                     return redirect()->route('home.index');
                 }
             }
-        }catch(Exception $e){
+            abort(404);
+        } catch (\Exception $e) {
             dd($e);
         }
     }
