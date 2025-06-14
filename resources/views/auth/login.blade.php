@@ -28,14 +28,33 @@
 
                         <div class="pb-3"></div>
 
-                        <div class="form-floating mb-3">
+                        <!-- <div class="form-floating mb-3">
                             <input id="password" type="password" class="form-control form-control_gray @error('password') is-invalid @enderror" name="password" required=""
                                 autocomplete="current-password">
                             <label for="customerPasswodInput">Password *</label>
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>  -->
+
+                        <div class="form-floating mb-3 position-relative">
+                            <input id="password" type="password"
+                                class="form-control form-control_gray pe-5 @error('password') is-invalid @enderror"
+                                name="password" required autocomplete="current-password">
+                            <label for="password">Password *</label>
+
+                            <!-- Nút icon nằm trong input -->
+                            <span class="position-absolute top-50 end-0 translate-middle-y me-3"
+                                style="cursor: pointer; z-index: 2;" onclick="togglePassword()">
+                                <i id="toggleIcon" class="bi bi-eye" style="font-size: 1.2rem;"></i>
                             </span>
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
@@ -49,7 +68,7 @@
                                 <i class="fab fa-google me-2"></i>
                                 <span>Sign in with Google</span>
                             </a>
-                            <a title="Login with Facebook" href="{{ route('auth.redirection','facebook') }}" class="btn btn-primary btn-facebook">
+                            <a title="Login with Facebook" href="{{ route('auth.redirection','facebook') }}" class="btn btn-primary btn-facebook w-100 text-uppercase mb-3 d-flex align-items-center justify-content-center">
                                 <i class="fab fa-facebook me-2"></i>
                                 <span>Sign in with Facebook</span>
                             </a>
@@ -92,4 +111,15 @@
     }
 </style>
 </div>
+<script>
+    function togglePassword() {
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.getElementById("toggleIcon");
+        const isPassword = passwordInput.type === "password";
+
+        passwordInput.type = isPassword ? "text" : "password";
+        toggleIcon.className = isPassword ? "bi bi-eye-slash" : "bi bi-eye";
+    }
+</script>
 @endsection
+

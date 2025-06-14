@@ -25,6 +25,10 @@
         integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('icon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('font/fonts.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     @stack("styles")
 </head>
 
@@ -255,12 +259,14 @@
     </svg>
     <style>
     #header {
-        padding-top: 8px;
-        padding-bottom: 8px;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 50px; /* hoặc 0 20px nếu cần */
+}
 
     .logo__image {
-        max-width: 220px;
+        max-width: 300px;
     }
     </style>
     <div class="header-mobile header_sticky">

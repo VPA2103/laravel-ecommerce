@@ -29,11 +29,6 @@
         <div id="page" class="">
             <div class="layout-wrap">
 
-                <!-- <div id="preload" class="preload-container">
-    <div class="preloading">
-        <span></span>
-    </div>
-</div> -->
 
                 <div class="section-menu-left">
                     <div class="box-logo">
