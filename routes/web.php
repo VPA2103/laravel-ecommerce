@@ -13,8 +13,7 @@ use App\Http\Controllers\ShopController;
 
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\Auth\FacebookController;
-
-
+use App\Http\Controllers\WishlistController;
 
 Auth::routes();
 
@@ -39,6 +38,7 @@ Route::put('cart/descrease-quantity/{rowId}', [CartController::class, 'decrease_
 Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove_item'])->name('cart.item.remove');
 Route::delete('/cart/clear', [CartController::class, 'empty_cart'])->name('cart.empty');
 
+Route::post('/wishlist/add',[WishlistController::class,'add_to_wishlist'])->name('wishlist.add');
 
 Route::middleware(['auth'])->group(function () {
      Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');

@@ -258,16 +258,17 @@
         </symbol>
     </svg>
     <style>
-    #header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 50px; /* hoặc 0 20px nếu cần */
-}
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 50px;
+            /* hoặc 0 20px nếu cần */
+        }
 
-    .logo__image {
-        max-width: 300px;
-    }
+        .logo__image {
+            max-width: 300px;
+        }
     </style>
     <div class="header-mobile header_sticky">
         <div class="container d-flex align-items-center h-100">
@@ -498,11 +499,13 @@
                     </div>
                     @endguest
 
-
-                    <a href="wishlist.html" class="header-tools__item">
+                    <a href="wishlist.html" class="header-tools__item header-tools__cart">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_heart" />
                         </svg>
+                        @if(Cart::instance('wishlist')->content()->count() > 0)
+                        <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
+                        @endif
                     </a>
 
                     <a href="{{route('cart.index')}}" class="header-tools__item header-tools__cart">
@@ -510,7 +513,7 @@
                             xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_cart" />
                         </svg>
-                        @if(Cart::instance('cart')->content()->count()>0)
+                        @if(Cart::instance('cart')->content()->count() > 0)
                         <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
                         @endif
                     </a>

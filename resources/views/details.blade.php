@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .filled-heart{
+        color: lightcoral;
+    }
+</style>
 <main class="pt-90">
     <div class="mb-md-1 pb-md-3"></div>
     <section class="product-single container">
@@ -119,18 +124,39 @@
                             <div class="qty-control__reduce">-</div>
                             <div class="qty-control__increase">+</div>
                         </div><!-- .qty-control -->
-                        <input type="hidden" name ="id" value="{{$product->id}}"/>
-                        <input type="hidden" name ="name" value="{{$product->name}}"/>
-                        <input type="hidden" name ="price" value="{{$product->sale_price = '' ? $product->regular_price : $product->sale_price}}"/>
+                        <input type="hidden" name="id" value="{{$product->id}}" />
+                        <input type="hidden" name="name" value="{{$product->name}}" />
+                        <input type="hidden" name="price" value="{{$product->sale_price = '' ? $product->regular_price : $product->sale_price}}" />
                         <button type="submit" class="btn btn-primary btn-addtocart" data-aside="cartDrawer">Add To Cart</button>
                     </div>
                 </form>
                 @endif
                 <div class="product-single__addtolinks">
-                    <a href="#" class="menu-link menu-link_us-s add-to-wishlist"><svg width="16" height="16" viewBox="0 0 20 20"
+                    @if(Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
+                    <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart">
+                        <svg width="16" height="16" viewBox="0 0 20 20"
                             fill="none" xmlns="http://www.w3.org/2000/svg">
                             <use href="#icon_heart" />
-                        </svg><span>Add to Wishlist</span></a>
+                        </svg>
+                        <span>Remove from Wishlist</span>
+                    </a>
+                    @else
+                    <form method="POST" action="{{ route('wishlist.add') }}" id="wishlist-form">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->id }}" />
+                        <input type="hidden" name="name" value="{{ $product->name }}" />
+                        <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />
+                        <input type="hidden" name="quantity" value="1" />
+                        <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist" onclick="document.getElementById('wishlist-form').submit();">
+                            <svg width="16" height="16" viewBox="0 0 20 20"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_heart" />
+                            </svg>
+                            <span>Add to Wishlist</span>
+                        </a>
+                    </form>
+
+                    @endif
                     <share-button class="share-button">
                         <button class="menu-link menu-link_us-s to-share border-0 bg-transparent d-flex align-items-center">
                             <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -407,16 +433,16 @@
                             </a>
                             <@if(Cart::instance('cart')->content()->where('id',$rproduct->id)->count()>0)
                                 <a href="{{route('cart.index')}}" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium btn-warning mb-3">Go To Cart</a>
-                            @else
+                                @else
                                 <form name="addtocart-form" method="post" action="{{route('cart.add')}}">
-                            @csrf
-                                <input type="hidden" name ="id" value="{{$rproduct->id}}"/>
-                                <input type="hidden" name ="quantity" value="1"/>
-                                <input type="hidden" name ="name" value="{{$rproduct->name}}"/>
-                                <input type="hidden" name ="price" value="{{$rproduct->sale_price = '' ? $rproduct->regular_price : $rproduct->sale_price}}"/>
-                                <button type="submit" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium" data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{$rproduct->id}}" />
+                                    <input type="hidden" name="quantity" value="1" />
+                                    <input type="hidden" name="name" value="{{$rproduct->name}}" />
+                                    <input type="hidden" name="price" value="{{$rproduct->sale_price = '' ? $rproduct->regular_price : $rproduct->sale_price}}" />
+                                    <button type="submit" class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium" data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
                                 </form>
-                            @endif
+                                @endif
                         </div>
 
                         <div class="pc__info position-relative">

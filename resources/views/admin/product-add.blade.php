@@ -163,7 +163,7 @@
                     <fieldset class="name">
                         <div class="body-title mb-10">Regular Price <span
                                 class="tf-color-1">*</span></div>
-                        <input class="mb-10" type="text" placeholder="Enter regular price"
+                        <input class="mb-10" type="number" placeholder="Enter regular price"
                             name="regular_price" tabindex="0" value="{{ old('regular_price') }}" aria-required="true"
                             required="">
                     </fieldset>
@@ -173,7 +173,7 @@
                     <fieldset class="name">
                         <div class="body-title mb-10">Sale Price <span
                                 class="tf-color-1">*</span></div>
-                        <input class="mb-10" type="text" placeholder="Enter sale price"
+                        <input class="mb-10" type="number" placeholder="Enter sale price"
                             name="sale_price" tabindex="0" value="{{ old('sale_price') }}" aria-required="true"
                             required="">
                     </fieldset>
