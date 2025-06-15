@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+    .filled-heart {
+        color: #d76b67;
+    }
+</style>
 <main class="pt-90">
     <section class="shop-main container d-flex pt-4 pt-xl-5">
         <div class="shop-sidebar side-sticky bg-body" id="shopFilter">
@@ -177,7 +181,7 @@
                             </div>
                             <div>
                                 <span class="text-secondary">Max Price: </span>
-                                <span class="price-range__max">$500</span>
+                                <span class="price-range__max">$10000</span>
                             </div>
                         </div>
                     </div>
@@ -388,12 +392,28 @@
                                 <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
                             </div>
 
-                            <button class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
+                            @if(Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
+                            <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart"
                                 title="Add To Wishlist">
                                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <use href="#icon_heart" />
                                 </svg>
                             </button>
+                            @else
+                            <form method="POST" action="{{ route('wishlist.add') }}">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $product->id }}" />
+                                <input type="hidden" name="name" value="{{ $product->name }}" />
+                                <input type="hidden" name="price" value="{{ $product->sale_price == '' ? $product->regular_price : $product->sale_price }}" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist "
+                                    title="Add To Wishlist">
+                                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#icon_heart" />
+                                    </svg>
+                                </button>
+                            </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -413,8 +433,8 @@
     <input type="hidden" name="order" id="order" value="{{ $order }}" />
     <input type="hidden" name="brands" id="hdnBrands" />
     <input type="hidden" name="categories" id="hdnCategories" />
-    <input type="hidden" name ="min" id="hdnMinPrice" value="{{$min_price}}"/>
-    <input type="hidden" name ="max" id="hdnMaxPrice" value="{{$max_price}}"/>
+    <input type="hidden" name="min" id="hdnMinPrice" value="{{$min_price}}" />
+    <input type="hidden" name="max" id="hdnMaxPrice" value="{{$max_price}}" />
 </form>
 
 @endsection
@@ -458,15 +478,15 @@
             $("#frmfilter").submit();
         });
 
-        $("[name='price_range']").on("change",function(){
-            var min=$(this).val().split(',')[0];
-            var max=$(this).val().split(',')[1];
+        $("[name='price_range']").on("change", function() {
+            var min = $(this).val().split(',')[0];
+            var max = $(this).val().split(',')[1];
             $("#hdnMinPrice").val(min);
             $("#hdnMaxPrice").val(max);
             setTimeout(() => {
                 $("#frmfilter").submit();
             }, 2000);
-            
+
         });
     });
 </script>
