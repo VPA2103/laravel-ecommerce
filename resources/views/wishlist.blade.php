@@ -50,9 +50,9 @@
                       <button type="submit" class="btn btn-sm btn-warning">Move To Cart</button>
                     </form>
               </td>
-              <td>
+              <!-- <td>
                 {{$item->qty}}
-              </td>
+              </td> -->
               <form method="POST" action="{{ route('wishlist.item.remove',['rowId' => $item->rowId]) }}" id="remove-item-{{ $item->id }}">
                 @csrf
                 @method('DELETE')
@@ -79,7 +79,7 @@
           </form>
 
         </div>
-        <div class="col-6">
+        <!-- <div class="col-6">
           <a href="#" class="remove-cart">
             <svg width="10" height="10" viewBox="0 0 10 10" fill="#767676" xmlns="http://www.w3.org/2000/svg">
               <path d="M0.259435 8.85506L9.11449 0L10 0.885506L1.14494 9.74056L0.259435 8.85506Z" />
@@ -87,7 +87,7 @@
             </svg>
           </a>
           </td>
-        </div>
+        </div> -->
       </div>
       </tr>
 

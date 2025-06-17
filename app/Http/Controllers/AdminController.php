@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Coupon;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -406,6 +407,13 @@ class AdminController extends Controller
         $product->images = $gallery_images;
         $product->save();
         return redirect()->route('admin.products')->with('status','Product has been updated successfully!');
+
+    }
+
+    public function coupons()
+    {
+        $coupons = Coupon::orderBy('expiry_date','DESC')->paginate(12);
+        return view('admin.coupons',compact('coupons'));
 
     }
 }
