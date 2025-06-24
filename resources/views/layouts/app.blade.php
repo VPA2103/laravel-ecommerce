@@ -269,6 +269,13 @@
         .logo__image {
             max-width: 300px;
         }
+
+        .logo {
+            margin-left: -45px;
+        }
+        .logo_foodterrrr{
+            margin-top: -30px;
+        }
     </style>
     <div class="header-mobile header_sticky">
         <div class="container d-flex align-items-center h-100">
@@ -529,10 +536,12 @@
             <div class="row row-cols-lg-5 row-cols-2">
                 <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
                     <div class="logo">
-                        <a href="{{route('home.index')}}">
+                        <div class="logo_foodterrrr">
+                            <a href="{{route('home.index')}}">
                             <img src="{{ asset('assets/images/LoGoMoi.png') }}" alt="SurfsideMedia"
-                                class="logo__image d-block" />
+                            class="logo__image d-block" />
                         </a>
+                        </div>                        
                     </div>
                     <p class="footer-address">65 Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1, TP. HCM</p>
                     <p class="m-0"><strong class="fw-medium">Vu73194@gmail.com</strong></p>
@@ -638,7 +647,7 @@
 
         <div class="footer-bottom">
             <div class="container d-md-flex align-items-center">
-                <span class="footer-copyright me-auto">©2024 Surfside Media</span>
+                <span class="footer-copyright me-auto">©2024 VuVietThang & VoPhucAn</span>
                 <div class="footer-settings d-md-flex align-items-center">
                     <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms
                         &amp;
