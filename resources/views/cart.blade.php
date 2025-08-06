@@ -125,7 +125,6 @@
             @method('DELETE')
             <button class="btn btn-light" type="submit">CLEAR CART</button>
           </form>
-
         </div>
         <div>
           @if(Session::has('success'))
