@@ -21,8 +21,6 @@ Route::controller(GoogleController::class)->group(function () {
      Route::get('/auth/redirection/{provider}', 'authProviderRedirect')->name('auth.redirection');
      Route::get('/auth/{provider}/callback', 'socialAuthentication')->name('auth.callback');
 });
-// Route::get('/auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
-// Route::get('/auth/facebook-callback', [FacebookController::class, 'facebookauthentication'])->name('auth.facebook-callback');
 
 
 

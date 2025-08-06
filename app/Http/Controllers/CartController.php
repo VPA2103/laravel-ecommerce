@@ -71,28 +71,6 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Invalid cupon code!');
         }
     }
-    // {
-    //     $coupon_code = $request->coupon_code;
-    //     if(isset($coupon_code))
-    //     {
-    //         $coupon = Coupon::where('code',$coupon_code)->where('expiry_date','>=',Carbon::today())
-    //         ->where('cart_value','<=',Cart::instance('cart')->subtotal())->first();
-    //         if(!$coupon){
-    //             return redirect()->back()->with('error','Invalid coupon code!');
-    //         }else{
-    //             Session::put('coupon',[
-    //                 'code'=>$coupon->code,
-    //                 'type'=>$coupon->type,
-    //                 'value'=>$coupon->value,
-    //                 'cart_value'=>$coupon->cart_value
-    //             ]);
-    //             $this->calculateDiscount();
-    //             return redirect()->back()->with('success','Coupon has been applied!');
-    //         }
-    //     }else{
-    //         return redirect()->back()->with('error','Invalid cupon code!');
-    //     }
-    // }
 
     public function calculateDiscount()
     {
