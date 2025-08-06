@@ -414,7 +414,6 @@ class AdminController extends Controller
     {
         $coupons = Coupon::orderBy('expiry_date','DESC')->paginate(12);
         return view('admin.coupons',compact('coupons'));
-
     }
 
     public function coupon_add (){

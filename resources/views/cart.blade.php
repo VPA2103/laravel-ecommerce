@@ -2,7 +2,7 @@
 @section('content')
 
 <style>
-  .text-success{
+  .text-success {
     color: #25f606 !important;
   }
 </style>
@@ -106,11 +106,20 @@
           </tbody>
         </table>
         <div class="cart-table-footer">
+          @if(!Session::has('coupon'))
           <form action="{{route('cart.coupon.apply')}}" method="POST" class="position-relative bg-body">
             @csrf
-            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value="{{ Session::has('coupon') ? Session::get('coupon')['code'].' Applied!' : '' }}">
+            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value="@if (Session::has('coupon')) {{ Session::get('coupon')['code']}} Applied! @endif">
             <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="APPLY COUPON">
           </form>
+          @else
+          <form action="{{route('cart.coupon.remove')}}" method="POST" class="position-relative bg-body">
+            @csrf
+            @method('DELETE')
+            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code" value=" @if (Session::has('coupon')) {{Session::get('coupon')['code']}} Applied! @endif">
+            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="REMOVE COUPON">
+          </form>
+          @endif
           <form action="{{route('cart.empty')}}" method="POST">
             @csrf
             @method('DELETE')
@@ -120,9 +129,9 @@
         </div>
         <div>
           @if(Session::has('success'))
-          <p class ="text-success">{{Session::get('success')}}</p>
+          <p class="text-success">{{Session::get('success')}}</p>
           @elseif(Session::has('error'))
-          <p class ="text-danger">{{Session::get('error')}}</p>
+          <p class="text-danger">{{Session::get('error')}}</p>
           @endif
         </div>
       </div>
