@@ -7,7 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Address;
 class CartController extends Controller
 {
     public function index()
@@ -97,5 +98,16 @@ class CartController extends Controller
                 'total'=>number_format(floatval($totalAfterDiscount),2,'.','')
             ]);
         }
+    }
+
+    public function checkout()
+    {
+        if(!Auth::check())
+        {
+            return redirect()->route('login');
+        }
+
+        $address = Address::where('user_id',Auth::user()->id)->where('isdefault',1)->first();
+        return view('checkout',compact('address'));
     }
 }
