@@ -3,7 +3,7 @@
 @section('content')
 <style>
     .filled-heart {
-        color:rgb(232, 22, 15);
+        color: rgb(232, 22, 15);
     }
 </style>
 <main class="pt-90">
