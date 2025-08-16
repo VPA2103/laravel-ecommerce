@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\OrderItem;
+use App\Models\OrderItems;
 use Faker\Guesser\Name;
 
 class CartController extends Controller
@@ -171,7 +172,7 @@ class CartController extends Controller
         $order->save();
 
         foreach (Cart::instance('cart')->content() as $item) {
-            $orderItem = new OrderItem();
+            $orderItem = new OrderItems();
             $orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
