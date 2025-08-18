@@ -6,12 +6,14 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\OrderItems;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
@@ -473,5 +475,12 @@ class AdminController extends Controller
     {
         $orders=Order::orderBy('created_at','DESC')->paginate(12);
         return view('admin.orders',compact('orders'));
+    }
+
+    public function order_details($order_id){
+        $order= Order::find($order_id);
+        $orderItems = OrderItems::where('order_id',$order_id)->orderBy('id')->paginate(12);
+        $transaction = Transaction::where('order_id',$order_id)->first();
+        return view('admin.order-details',compact('order','orderItems','transaction'));
     }
 }
