@@ -6,7 +6,7 @@
         </a>
     </li>
     <li>
-        <a href="account-orders.html" class="menu-link d-flex align-items-center">
+        <a href="{{route('user.orders')}}" class="menu-link d-flex align-items-center">
             <i class="icon-shopping-cart me-2"></i>
             <span>Orders</span>
         </a>
