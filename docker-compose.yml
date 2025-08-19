@@ -28,7 +28,7 @@ services:
     image: mysql:8
     container_name: mysql_db
     ports:
-      - "3307:3306"
+      - "33066:3307"
     environment:
       MYSQL_DATABASE: laravel_ecommerce_db
       MYSQL_ROOT_PASSWORD: root
