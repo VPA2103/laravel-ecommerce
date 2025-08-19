@@ -77,12 +77,12 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
      Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
      Route::get('/admin/product/add', [AdminController::class, 'product_add'])->name('admin.product.add');
      Route::post('/admin/product/store', [AdminController::class, 'product_store'])->name('admin.product.store');
-     Route::delete('/admin/product/delete/{id}', [AdminController::class, 'product_delete'])->name('admin.product.delete');
      Route::get('/admin/product/{id}/edit', [AdminController::class, 'product_edit'])->name('admin.product.edit');
      Route::put('/admin/product/update', [AdminController::class, 'product_update'])->name('admin.product_update');
+     Route::delete('/admin/product/delete/{id}', [AdminController::class, 'product_delete'])->name('admin.product.delete');
 
      Route::get('/admin.coupons',[AdminController::class,'coupons'])->name('admin.coupons');
-     Route::get('/admin/coupon/add', [AdminController::class, 'coupon_add'])->name('admin.coupon-add');
+     Route::get('/admin/coupon/add', [AdminController::class, 'coupon_add'])->name('admin.coupon.add');
      Route::post('/admin/coupon/store', [AdminController::class, 'coupon_store'])->name('admin.coupon.store');
      Route::get('/admin/coupon/{id}/edit', [AdminController::class, 'coupon_edit'])->name('admin.coupon.edit');
      Route::put('/admin/coupon/update', [AdminController::class, 'coupon_update'])->name('admin.coupon.update');
@@ -91,4 +91,13 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
      Route::get('/admin/orders',[AdminController::class,'orders'])->name('admin.orders');
      Route::get('/admin/order/{order_id}/details',[AdminController::class,'order_details'])->name('admin.order.details');
      Route::put('/admin/order/update_status',[AdminController::class,'update_order_status'])->name('admin.order.status.update');
+
+     Route::get('/admin/slides',[AdminController::class,'slides'])->name('admin.slides');
+     Route::get('/admin/slide/add',[AdminController::class,'slide_add'])->name('admin.slide.add');
+     Route::post('/admin/slide/store',[AdminController::class,'slide_store'])->name('admin.slide.store');
+     Route::get('/admin/slide/{id}/edit', [AdminController::class, 'slide_edit'])->name('admin.slide.edit');
+     Route::put('/admin/slide/update', [AdminController::class, 'slide_update'])->name('admin.slide.update');
+     Route::delete('/admin/slide/{id}/delete', [AdminController::class, 'slide_delete'])->name('admin.slide.delete');
+
+
 });
