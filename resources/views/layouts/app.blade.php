@@ -340,7 +340,7 @@
                             <a href="about.html" class="navigation__link">Thông Tin</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Liên Hệ</a>
+                            <a href="{{route('home.contact')}}" class="navigation__link">Liên Hệ</a>
                         </li>
                     </ul>
                 </div>
@@ -429,7 +429,7 @@
                             <a href="about.html" class="navigation__link">Thông Tin</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="contact.html" class="navigation__link">Liên Hệ</a>
+                            <a href="{{route('home.contact')}}" class="navigation__link">Liên Hệ</a>
                         </li>
                     </ul>
                 </nav>
