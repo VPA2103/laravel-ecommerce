@@ -100,6 +100,7 @@ class AdminController extends Controller
         $this->GenerateBrandThumbailImage($image, $file_name);
         $brand->image = $file_name;
         $brand->save();
+        
         return redirect()->route('admin.brands')->with('success', 'Brand Added Successfully');
     }
     public function brand_edit($id)
@@ -568,6 +569,7 @@ class AdminController extends Controller
             'status' => 'required',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
+
         $slide = new Slide();
         $slide->tagline = $request->tagline;
         $slide->title = $request->title;
@@ -583,6 +585,7 @@ class AdminController extends Controller
         $this->GenerateSlideThumbailImage($image, $file_name);
         $slide->image = $file_name;
         $slide->save();
+        
         return redirect()->route('admin.slides')->with('status', 'Slide added successfully');
     }
 

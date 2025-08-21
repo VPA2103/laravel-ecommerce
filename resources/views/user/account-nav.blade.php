@@ -12,7 +12,7 @@
         </a>
     </li>
     <li>
-        <a href="account-address.html" class="menu-link d-flex align-items-center">
+        <a href="{{ route('user.account.address') }}" class="menu-link d-flex align-items-center">
             <i class="fas fa-map-marker-alt me-2"></i>
             <span>Addresses</span>
         </a>

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Address;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Models\OrderItems;
@@ -33,6 +35,7 @@ class UserController extends Controller
         }
         
     }
+
     public function order_cancel(Request $request)
     {
         $order = Order::find($request->order_id);
@@ -74,4 +77,54 @@ class UserController extends Controller
 
             return back()->with('success', 'Cập nhật thông tin thành công!');
     }
+
+    public function account_address(Request $request){
+        $user_id = Auth::id();
+
+        $addresses = Address::where('user_id', $user_id)
+            ->orderByDesc('isdefault')
+            ->get();
+    
+        return view ('user.account-address',compact('addresses'));
+    }
+
+    public function address_add(){
+        return view('user.account-address-add');
+    }
+
+    public function address_store(Request $request){
+
+        $request->validate([
+            'name' => 'required|max:100',
+            'phone' => 'required|numeric|digits:10',
+            'zip' => 'required|numeric|digits:6',
+            'state' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'locality' => 'required',
+            'landmark' => 'required',
+        ]);
+
+        $address = Address::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'zip' => $request->zip,
+            'state' => $request->state,
+            'city' => $request->city,
+            'address' => $request->address,
+            'locality' => $request->locality,
+            'landmark' => $request->landmark,
+            'country' => 'Viet Nam',
+            'user_id' => Auth::id(),
+            'isdefault' => true,
+        ]);
+
+        return redirect('user.account.address')->back()->with('success', 'Thêm địa chỉ thành công!');
+    }
+
+    public function address_edit($user_id){
+        $address = Address::select('id')->get();
+        return view('admin.address-edit', compact('address'));
+    }
+
 }

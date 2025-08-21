@@ -65,6 +65,11 @@ Route::middleware(['auth'])->group(function () {
      Route::put('/account-order/cancel-order',[UserController::class,'order_cancel'])->name('user.order.cancel');
      Route::get('/account-details',[UserController::class,'account_details'])->name('user.account.details');
      Route::post('/account-details/update', [UserController::class, 'update_account'])->name('account.update');
+     Route::get('/account-address', [UserController::class, 'account_address'])->name('user.account.address');
+     Route::get('/account/address/add', [UserController::class, 'address_add'])->name('user.account.address.add');
+     Route::post('/account/address/store', [UserController::class, 'address_store'])->name('user.address.store');
+
+
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -75,7 +80,6 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
      Route::get('/admin/brand/edit/{id}', [AdminController::class, 'brand_edit'])->name('admin.brand.edit');
      Route::post('/admin/brand/update', [AdminController::class, 'brand_update'])->name('admin.brand.update');
      Route::delete('/admin/brand/delete/{id}', [AdminController::class, 'brand_delete'])->name('admin.brand.delete');
-
      Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
      Route::get('/admin/category/add', [AdminController::class, 'add_category'])->name('admin.category.add');
      Route::post('/admin/category/store', [AdminController::class, 'category_store'])->name('admin.category.store');
