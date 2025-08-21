@@ -54,6 +54,7 @@ Route::get('order-confirmation',[CartController::class, 'order_confirmation'])->
 
 Route::get('/contact-us',[HomeController::class,'contact'])->name('home.contact');
 Route::post('/contact/store',[HomeController::class,'contact_store'])->name('home.contact.store');
+Route::get('/about',[HomeController::class,'about'])->name('home.about');
 
 Route::get('/search',[HomeController::class,'search'])->name('home.search');
 
@@ -62,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/account-orders',[UserController::class,'orders'])->name('user.orders');
      Route::get('/account-order/{order_id}/details',[UserController::class,'order_details'])->name('user.order.details');
      Route::put('/account-order/cancel-order',[UserController::class,'order_cancel'])->name('user.order.cancel');
+     Route::get('/account-details',[UserController::class,'account_details'])->name('user.account.details');
+     Route::post('/account-details/update', [UserController::class, 'update_account'])->name('account.update');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -110,4 +113,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
 
 
      Route::get('/admin/search',[AdminController::class,'search'])->name('admin.search');
+
+
+
 });

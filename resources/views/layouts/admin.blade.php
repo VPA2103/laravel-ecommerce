@@ -164,7 +164,7 @@
                                         @csrf
                                     <a href="{{ route('logout')}}" class="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         <div class="icon"><i class="icon-log-out"></i></div>
-                                        <div class="text">Đăng Xuất</div>
+                                        <div class="text">Log Out</div>
                                     </a>
                                     </form>
                                 </li>
@@ -280,7 +280,7 @@
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
                                                 <span class="image">
-                                                    <img src="images/avatar/pngtree-vector-businessman-icon-png-image_4869955.jpg" alt="">
+                                                    <img src="" alt="">
                                                 </span>
                                                 <span class="flex flex-column">
                                                     <span class="body-title mb-2">Vu Viet Thang</span>
