@@ -7,6 +7,7 @@ use App\Models\OrderItems;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
@@ -39,5 +40,38 @@ class UserController extends Controller
         $order->canceled_date=Carbon::now();
         $order->save();
         return back()->with('status',"Order has been canceled successfully!");
+    }
+
+    public function account_details()
+    {
+        $user = Auth()->user();
+        return view ('user.account-details',compact('user'));
+    }
+    public function update_account(Request $request)
+    {
+            $user = Auth::user();
+
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'mobile' => 'nullable|string|max:20',
+                'old_password' => 'nullable|string',
+                'new_password' => 'nullable|string|min:6|confirmed',
+            ]);
+
+            $user->name = $request->name;
+            $user->mobile = $request->mobile;
+
+            // Nếu user muốn đổi password
+            if ($request->filled('old_password') || $request->filled('new_password')) {
+                if (!Hash::check($request->old_password, $user->password)) {
+                    return back()->withErrors(['old_password' => 'Mật khẩu cũ không đúng']);
+                }
+
+                $user->password = Hash::make($request->new_password);
+            }
+
+            $user->save();
+
+            return back()->with('success', 'Cập nhật thông tin thành công!');
     }
 }

@@ -368,13 +368,13 @@
                             <a href="{{route('shop.index')}}" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{route('cart.index')}}" class="navigation__link">Giỏ Hàng</a>
+                            <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">Thông Tin</a>
+                            <a href="{{route('home.about')}}" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{route('home.contact')}}" class="navigation__link">Liên Hệ</a>
+                            <a href="{{route('home.contact')}}" class="navigation__link">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -451,19 +451,19 @@
                 <nav class="navigation">
                     <ul class="navigation__list list-unstyled d-flex">
                         <li class="navigation__item">
-                            <a href="{{route('home.index')}}" class="navigation__link">Trang Chủ</a>
+                            <a href="{{route('home.index')}}" class="navigation__link">Home</a>
                         </li>
                         <li class="navigation__item">
                             <a href="{{route('shop.index')}}" class="navigation__link">Shop</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{route('cart.index')}}" class="navigation__link">Giỏ Hàng</a>
+                            <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="about.html" class="navigation__link">Thông Tin</a>
+                            <a href="{{route('home.about')}}" class="navigation__link">About</a>
                         </li>
                         <li class="navigation__item">
-                            <a href="{{route('home.contact')}}" class="navigation__link">Liên Hệ</a>
+                            <a href="{{route('home.contact')}}" class="navigation__link">Contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -612,53 +612,53 @@
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Công Ty</h6>
+                    <h6 class="sub-menu__title text-uppercase">Company</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="about-2.html" class="menu-link menu-link_us-s">Về Chúng Tôi</a>
+                        <li class="sub-menu__item"><a href="{{route('home.about')}}" class="menu-link menu-link_us-s">About Us</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Nghề nghiệp</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Chi Nhánh</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
                         <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a>
                         </li>
-                        <li class="sub-menu__item"><a href="contact-2.html" class="menu-link menu-link_us-s">Liên Hệ Với Chúng Tôi</a></li>
+                        <li class="sub-menu__item"><a href="{{route('home.contact')}}" class="menu-link menu-link_us-s">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Cửa Hàng</h6>
+                    <h6 class="sub-menu__title text-uppercase">Shop</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">Sản Phẩm Mới</a></li>
-                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Phụ Kiện</a>
+                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a></li>
+                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
                         </li>
-                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Nam Giới</a></li>
-                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Phụ Nữ</a></li>
-                        <li class="sub-menu__item"><a href="shop1.html" class="menu-link menu-link_us-s">Mua Sắm Tất Cả</a>
+                        <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
+                        <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
+                        <li class="sub-menu__item"><a href="{{route('shop.index')}}" class="menu-link menu-link_us-s">Shop All</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Trợ Giúp</h6>
+                    <h6 class="sub-menu__title text-uppercase">Help</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Hệ Thống Khách Hàng</a>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a>
                         </li>
-                        <li class="sub-menu__item"><a href="account_dashboard.html" class="menu-link menu-link_us-s">Trang Cá Nhân</a>
+                        <li class="sub-menu__item"><a href="{{route('user.index')}}" class="menu-link menu-link_us-s">My Account</a>
                         </li>
-                        <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Tìm Cửa Hàng</a>
+                        <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
                         </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Pháp Lý & Quyền Riêng Tư</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Thẻ Quà Tặng</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
-                    <h6 class="sub-menu__title text-uppercase">Thể Loại</h6>
+                    <h6 class="sub-menu__title text-uppercase">Categories</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Áo Thun</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Quần Jeans</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Giày</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Cặp</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Tất Cả Sản Phẩm</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shirts</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a></li>
+                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
+                        <li class="sub-menu__item"><a href="{{route('shop.index')}}" class="menu-link menu-link_us-s">Shop All</a></li>
                     </ul>
                 </div>
             </div>
