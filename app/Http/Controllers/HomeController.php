@@ -24,6 +24,10 @@ class HomeController extends Controller
     {
         return view('contact');
     }
+    public function about()
+    {
+        return view('about');
+    }
 
     public function contact_store(Request $request)
     {

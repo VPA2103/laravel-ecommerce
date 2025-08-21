@@ -12,19 +12,19 @@
         </a>
     </li>
     <li>
-        <a href="account-address.html" class="menu-link d-flex align-items-center">
+        <a href="{{ route('user.account.address') }}" class="menu-link d-flex align-items-center">
             <i class="fas fa-map-marker-alt me-2"></i>
             <span>Addresses</span>
         </a>
     </li>
     <li>
-        <a href="account-details.html" class="menu-link d-flex align-items-center">
+        <a href="{{route('user.account.details')}}" class="menu-link d-flex align-items-center">
             <i class="icon-user me-2"></i>
             <span>Account Details</span>
         </a>
     </li>
     <li>
-        <a href="account-wishlist.html" class="menu-link d-flex align-items-center">
+        <a href="{{route('wishlist.index')}}" class="menu-link d-flex align-items-center">
             <i class="icon-heart me-2"></i>
             <span>Wishlist</span>
         </a>
