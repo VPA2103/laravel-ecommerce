@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('content')
 
-<style>
-    .delete {
-    cursor: pointer;
+    <style>
+        .delete {
+            cursor: pointer;
 
 
-}
-</style>
+        }
+    </style>
     <main class="pt-90">
         <div class="mb-4 pb-4"></div>
         <section class="my-account container">
@@ -28,7 +28,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="account-address.html" class="menu-link d-flex align-items-center">
+                            <a href="{{ route('user.account.address') }}" class="menu-link d-flex align-items-center">
                                 <i class="fas fa-map-marker-alt me-2"></i>
                                 <span>Addresses</span>
                             </a>
@@ -72,33 +72,62 @@
                             @foreach ($addresses as $address)
                                 <div class="my-account__address-item col-md-6">
                                     <div class="my-account__address-item__title">
-                                        <h5>{{$address->name}} <i class="fa fa-check-circle text-success"></i></h5>
+                                        <h5>
+                                            {{$address->name}} 
+                                            @if ($address->isdefault)
+                                                <i class="fa fa-check-circle text-success"></i>
+                                            @endif
+                                        </h5>
                                         <div>
                                             <a href="{{ route('user.address.edit', $address->id) }}">
                                                 <div class="item edit" style="cursor: pointer; color: green;">
                                                     <i class="icon-edit-3"></i> Edit
                                                 </div>
-                                            </a>                                            
+                                            </a>
                                             <form action="{{ route('user.address.delete', $address->id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <div class="item text-danger delete" >
+                                                <div class="item text-danger delete">
                                                     <i class="icon-trash-2"></i> Delete
                                                 </div>
                                             </form>
-                                        </div>              
+                                        </div>
                                     </div>
+
                                     <div class="my-account__address-item__detail">
                                         <p>{{$address->address}}</p>
                                         <p>{{$address->locality}}</p>
-                                        <p>{{$address->city}},{{$address->country}}</p>
+                                        <p>{{$address->city}}, {{$address->country}}</p>
                                         <p>{{$address->landmark}}</p>
                                         <p>{{$address->zip}}</p>
                                         <br>
                                         <p>Mobile : {{$address->phone}}</p>
                                     </div>
+
+                                    <!-- Nút chọn mặc định -->
+                                    <div class="col-md-6">
+                                        <form action="{{ route('user.address.default', $address->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <div class="form-check">
+                                                <input 
+                                                    class="form-check-input" 
+                                                    type="radio" 
+                                                    name="default_address" 
+                                                    value="{{ $address->id }}"
+                                                    id="isdefault-{{ $address->id }}"
+                                                    {{ $address->isdefault ? 'checked' : '' }}
+                                                    onchange="this.form.submit()"
+                                                >
+                                                <label class="form-check-label" for="isdefault-{{ $address->id }}">
+                                                    Make as Default address
+                                                </label>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             @endforeach
+
 
                             <hr>
                         </div>
@@ -110,23 +139,23 @@
 @endsection
 
 @push('scripts')
-<script>
-    $(function(){
-        $('.delete').on('click',function(e){
-            e.preventDefault();
-            var form= $(this).closest('form');
-            swal({
-                title: 'Are you sure?',
-                text: "You want to delete this address?",
-                type: 'warning',
-                buttons: ["Cancel","Yes"],
-                confirmButtonColor: '#dc3545',
-            }).then(function(result){
-                if(result){
-                    form.submit();
-                }
+    <script>
+        $(function () {
+            $('.delete').on('click', function (e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                swal({
+                    title: 'Are you sure?',
+                    text: "You want to delete this address?",
+                    type: 'warning',
+                    buttons: ["Cancel", "Yes"],
+                    confirmButtonColor: '#dc3545',
+                }).then(function (result) {
+                    if (result) {
+                        form.submit();
+                    }
+                })
             })
         })
-    })
-</script>
+    </script>
 @endpush

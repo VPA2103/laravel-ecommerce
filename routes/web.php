@@ -69,8 +69,13 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/account/address/add', [UserController::class, 'address_add'])->name('user.account.address.add');
      Route::post('/account/address/store', [UserController::class, 'address_store'])->name('user.address.store');
      Route::get('/account/address/edit/{id}',[UserController::class,'address_edit'])->name('user.address.edit');
-     Route::post('/account/address/update', [UserController::class, 'address_update'])->name('user.address.update');
+     Route::post('/account/address/update/{id}', [UserController::class, 'address_update'])->name('user.address.update');
      Route::delete('/account/address/delete/{user_id}', [UserController::class, 'address_delete'])->name('user.address.delete');
+     Route::patch('/user/address/{id}/default', [App\Http\Controllers\UserController::class, 'address_set_default'])
+     ->name('user.address.default');
+     // Route::patch('/user/address/{id}/default', [App\Http\Controllers\UserController::class, 'setDefault'])
+     //      ->name('user.address.default.checkout');
+
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {

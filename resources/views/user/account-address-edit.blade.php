@@ -67,7 +67,7 @@
                               <h5>Edit Address</h5>
                           </div>
                           <div class="card-body">
-                              <form action="{{ route('user.address.update') }}" method="POST">
+                              <form action="{{ route('user.address.update',$address->id) }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6">
@@ -142,14 +142,7 @@
                                         </div>
                                     </div>  
 
-                                    <div class="col-md-6">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" id="isdefault" name="isdefault">
-                                            <label class="form-check-label" for="isdefault">
-                                                Make as Default address
-                                            </label>
-                                        </div>
-                                    </div>  
+                                     
 
                                     <div class="col-md-12 text-right">
                                         <button type="submit" class="btn btn-success">Submit</button>
