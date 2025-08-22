@@ -105,6 +105,7 @@ class UserController extends Controller
             'landmark' => 'required',
         ]);
 
+        
         $address = Address::create([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -119,12 +120,56 @@ class UserController extends Controller
             'isdefault' => true,
         ]);
 
-        return redirect('user.account.address')->back()->with('success', 'Thêm địa chỉ thành công!');
+        return redirect()->route('user.account.address')->with('success', 'Thêm địa chỉ thành công!');
     }
 
-    public function address_edit($user_id){
-        $address = Address::select('id')->get();
-        return view('admin.address-edit', compact('address'));
+    public function address_edit($id)
+    {
+       $address = Address::where('id', $id)
+                      ->where('user_id', auth()->id())
+                      ->firstOrFail();
+        return view('user.account-address-edit', compact('address'));
     }
+    
+    public function address_update(Request $request)
+    {
+        // validate dữ liệu
+        $request->validate([
+            'name' => 'required|max:100',
+            'phone' => 'required|numeric|digits:10',
+            'zip' => 'required|numeric|digits:6',
+            'state' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'locality' => 'required',
+            'landmark' => 'required',
+        ]);
 
+        // lấy địa chỉ mặc định của user hiện tại
+        // $address = Address::where('user_id', Auth::id())
+        //                 ->where('isdefault', true)
+        //                 ->firstOrFail();
+
+        // cập nhật
+        $address->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'zip' => $request->zip,
+            'state' => $request->state,
+            'city' => $request->city,
+            'address' => $request->address,
+            'locality' => $request->locality,
+            'landmark' => $request->landmark,
+            'country' => 'Viet Nam',
+        ]);
+
+        return redirect()->route('user.account.address')
+                        ->with('success', 'Cập nhật địa chỉ thành công!');
+    }
+    public function address_delete($id)
+    {
+        $address = Address::find($id);
+        $address->delete();
+        return redirect()->route('user.account.address')->with('success', 'Address Deleted Successfully');
+    }
 }

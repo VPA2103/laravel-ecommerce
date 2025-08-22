@@ -68,8 +68,9 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/account-address', [UserController::class, 'account_address'])->name('user.account.address');
      Route::get('/account/address/add', [UserController::class, 'address_add'])->name('user.account.address.add');
      Route::post('/account/address/store', [UserController::class, 'address_store'])->name('user.address.store');
-
-
+     Route::get('/account/address/edit/{id}',[UserController::class,'address_edit'])->name('user.address.edit');
+     Route::post('/account/address/update', [UserController::class, 'address_update'])->name('user.address.update');
+     Route::delete('/account/address/delete/{user_id}', [UserController::class, 'address_delete'])->name('user.address.delete');
 });
 
 Route::middleware(['auth', AuthAdmin::class])->group(function () {

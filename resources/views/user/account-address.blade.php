@@ -1,5 +1,13 @@
 @extends('layouts.app')
 @section('content')
+
+<style>
+    .delete {
+    cursor: pointer;
+
+
+}
+</style>
     <main class="pt-90">
         <div class="mb-4 pb-4"></div>
         <section class="my-account container">
@@ -65,7 +73,20 @@
                                 <div class="my-account__address-item col-md-6">
                                     <div class="my-account__address-item__title">
                                         <h5>{{$address->name}} <i class="fa fa-check-circle text-success"></i></h5>
-                                        <a href="#">Edit</a>
+                                        <div>
+                                            <a href="{{ route('user.address.edit', $address->id) }}">
+                                                <div class="item edit" style="cursor: pointer; color: green;">
+                                                    <i class="icon-edit-3"></i> Edit
+                                                </div>
+                                            </a>                                            
+                                            <form action="{{ route('user.address.delete', $address->id) }}" method="POST" class="delete-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="item text-danger delete" >
+                                                    <i class="icon-trash-2"></i> Delete
+                                                </div>
+                                            </form>
+                                        </div>              
                                     </div>
                                     <div class="my-account__address-item__detail">
                                         <p>{{$address->address}}</p>
@@ -87,3 +108,25 @@
         </section>
     </main>
 @endsection
+
+@push('scripts')
+<script>
+    $(function(){
+        $('.delete').on('click',function(e){
+            e.preventDefault();
+            var form= $(this).closest('form');
+            swal({
+                title: 'Are you sure?',
+                text: "You want to delete this address?",
+                type: 'warning',
+                buttons: ["Cancel","Yes"],
+                confirmButtonColor: '#dc3545',
+            }).then(function(result){
+                if(result){
+                    form.submit();
+                }
+            })
+        })
+    })
+</script>
+@endpush
