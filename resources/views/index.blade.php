@@ -2,13 +2,13 @@
 @section('content')
     <main>
         <section class="swiper-container js-swiper-slider swiper-number-pagination slideshow" data-settings='{
-                    "autoplay": {
-                      "delay": 5000
-                    },
-                    "slidesPerView": 1,
-                    "effect": "fade",
-                    "loop": true
-                  }'>
+                                        "autoplay": {
+                                          "delay": 5000
+                                        },
+                                        "slidesPerView": 1,
+                                        "effect": "fade",
+                                        "loop": true
+                                      }'>
             <div class="swiper-wrapper">
                 @foreach ($slides as $slide)
                     <div class="swiper-slide">
@@ -55,42 +55,42 @@
 
                 <div class="position-relative">
                     <div class="swiper-container js-swiper-slider" data-settings='{
-                          "autoplay": {
-                            "delay": 5000
-                          },
-                          "slidesPerView": 8,
-                          "slidesPerGroup": 1,
-                          "effect": "none",
-                          "loop": true,
-                          "navigation": {
-                            "nextEl": ".products-carousel__next-1",
-                            "prevEl": ".products-carousel__prev-1"
-                          },
-                          "breakpoints": {
-                            "320": {
-                              "slidesPerView": 2,
-                              "slidesPerGroup": 2,
-                              "spaceBetween": 15
-                            },
-                            "768": {
-                              "slidesPerView": 4,
-                              "slidesPerGroup": 4,
-                              "spaceBetween": 30
-                            },
-                            "992": {
-                              "slidesPerView": 6,
-                              "slidesPerGroup": 1,
-                              "spaceBetween": 45,
-                              "pagination": false
-                            },
-                            "1200": {
-                              "slidesPerView": 8,
-                              "slidesPerGroup": 1,
-                              "spaceBetween": 60,
-                              "pagination": false
-                            }
-                          }
-                        }'>
+                                              "autoplay": {
+                                                "delay": 5000
+                                              },
+                                              "slidesPerView": 8,
+                                              "slidesPerGroup": 1,
+                                              "effect": "none",
+                                              "loop": true,
+                                              "navigation": {
+                                                "nextEl": ".products-carousel__next-1",
+                                                "prevEl": ".products-carousel__prev-1"
+                                              },
+                                              "breakpoints": {
+                                                "320": {
+                                                  "slidesPerView": 2,
+                                                  "slidesPerGroup": 2,
+                                                  "spaceBetween": 15
+                                                },
+                                                "768": {
+                                                  "slidesPerView": 4,
+                                                  "slidesPerGroup": 4,
+                                                  "spaceBetween": 30
+                                                },
+                                                "992": {
+                                                  "slidesPerView": 6,
+                                                  "slidesPerGroup": 1,
+                                                  "spaceBetween": 45,
+                                                  "pagination": false
+                                                },
+                                                "1200": {
+                                                  "slidesPerView": 8,
+                                                  "slidesPerGroup": 1,
+                                                  "spaceBetween": 60,
+                                                  "pagination": false
+                                                }
+                                              }
+                                            }'>
                         <div class="swiper-wrapper">
                             @foreach ($categories as $category)
                                 <div class="swiper-slide">
@@ -160,38 +160,38 @@
                     <div class="col-md-6 col-lg-8 col-xl-80per">
                         <div class="position-relative">
                             <div class="swiper-container js-swiper-slider" data-settings='{
-                              "autoplay": {
-                                "delay": 5000
-                              },
-                              "slidesPerView": 4,
-                              "slidesPerGroup": 4,
-                              "effect": "none",
-                              "loop": false,
-                              "breakpoints": {
-                                "320": {
-                                  "slidesPerView": 2,
-                                  "slidesPerGroup": 2,
-                                  "spaceBetween": 14
-                                },
-                                "768": {
-                                  "slidesPerView": 2,
-                                  "slidesPerGroup": 3,
-                                  "spaceBetween": 24
-                                },
-                                "992": {
-                                  "slidesPerView": 3,
-                                  "slidesPerGroup": 1,
-                                  "spaceBetween": 30,
-                                  "pagination": false
-                                },
-                                "1200": {
-                                  "slidesPerView": 4,
-                                  "slidesPerGroup": 1,
-                                  "spaceBetween": 30,
-                                  "pagination": false
-                                }
-                              }
-                            }'>
+                                                  "autoplay": {
+                                                    "delay": 5000
+                                                  },
+                                                  "slidesPerView": 4,
+                                                  "slidesPerGroup": 4,
+                                                  "effect": "none",
+                                                  "loop": false,
+                                                  "breakpoints": {
+                                                    "320": {
+                                                      "slidesPerView": 2,
+                                                      "slidesPerGroup": 2,
+                                                      "spaceBetween": 14
+                                                    },
+                                                    "768": {
+                                                      "slidesPerView": 2,
+                                                      "slidesPerGroup": 3,
+                                                      "spaceBetween": 24
+                                                    },
+                                                    "992": {
+                                                      "slidesPerView": 3,
+                                                      "slidesPerGroup": 1,
+                                                      "spaceBetween": 30,
+                                                      "pagination": false
+                                                    },
+                                                    "1200": {
+                                                      "slidesPerView": 4,
+                                                      "slidesPerGroup": 1,
+                                                      "spaceBetween": 30,
+                                                      "pagination": false
+                                                    }
+                                                  }
+                                                }'>
                                 <div class="swiper-wrapper">
                                     @foreach($sproducts as $sproduct)
                                         <div class="swiper-slide product-card product-card_style3">
@@ -230,33 +230,34 @@
             <div class="mb-3 mb-xl-5 pt-1 pb-4"></div>
 
             <section class="category-banner container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="category-banner__item border-radius-10 mb-5">
-                            <img loading="lazy" class="h-auto" src="{{ asset('assets/images/home/demo3/category_9.jpg') }}"
-                                width="690" height="665" alt="" />
-                            <div class="category-banner__item-mark">
-                                Starting at $19
+                <div class="swiper-wrapper">
+                    @foreach ($sproducts as $product)
+                        <div class="swiper-slide product-card product-card_style3 me-3">
+                            <div class="pc__img-wrapper">
+                                <a href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}">
+                                    <img loading="lazy" src="{{ asset('uploads/products') }}/{{ $product->image }}" width="258"
+                                        height="313" alt="{{ $product->name }}" class="pc__img">
+                                </a>
                             </div>
-                            <div class="category-banner__item-content">
-                                <h3 class="mb-0">Blazers</h3>
-                                <a href="#" class="btn-link default-underline text-uppercase fw-medium">Shop Now</a>
+
+                            <div class="pc__info position-relative">
+                                <h6 class="pc__title">
+                                    <a href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}">
+                                        {{ $product->name }}
+                                    </a>
+                                </h6>
+                                <div class="product-card__price d-flex">
+                                    <span class="money price text-secondary">
+                                        @if($product->sale_price)
+                                            <s>${{ $product->regular_price }}</s> ${{ $product->sale_price }}
+                                        @else
+                                            ${{ $product->regular_price }}
+                                        @endif
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="category-banner__item border-radius-10 mb-5">
-                            <img loading="lazy" class="h-auto" src="{{ asset('assets/images/home/demo3/category_10.jpg') }}"
-                                width="690" height="665" alt="" />
-                            <div class="category-banner__item-mark">
-                                Starting at $19
-                            </div>
-                            <div class="category-banner__item-content">
-                                <h3 class="mb-0">Sportswear</h3>
-                                <a href="#" class="btn-link default-underline text-uppercase fw-medium">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </section>
 
