@@ -127,14 +127,14 @@
                                                     @error('landmark') <span class="text-danger">{{$message}}</span> @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="1" id="isdefault" name="isdefault">
                                                     <label class="form-check-label" for="isdefault">
                                                         Make as Default address
                                                     </label>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="col-md-12 text-right">
                                                 <button type="submit" class="btn btn-success">Submit</button>
                                             </div>

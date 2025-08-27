@@ -119,7 +119,7 @@ class UserController extends Controller
             'landmark' => $request->landmark,
             'country' => 'Viet Nam',
             'user_id' => Auth::id(),
-            'isdefault' => true,
+            'isdefault' => false,
         ]);
 
         return redirect()->route('user.account.address')->with('success', 'Thêm địa chỉ thành công!');
@@ -183,7 +183,7 @@ class UserController extends Controller
             ->where('id', $id)
             ->update(['isdefault' => true]);
 
-        return redirect()->back()->with('success', 'Đã đặt địa chỉ mặc định!');
+        return back()->with('success', 'Đã đặt địa chỉ mặc định!');
     }
 
 
