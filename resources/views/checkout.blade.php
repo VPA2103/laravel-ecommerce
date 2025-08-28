@@ -77,24 +77,24 @@
 
                                     <!-- Nút chọn mặc định -->
                                     <div class="col-md-6">
-                                        <form action="{{ route('user.address.default', $addresss->id) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <div class="form-check">
-                                                <input 
-                                                    class="form-check-input" 
-                                                    type="radio" 
-                                                    name="default_address" 
-                                                    value="{{ $addresss->id }}"
-                                                    id="isdefault-{{ $addresss->id }}"
-                                                    {{ $addresss->isdefault ? 'checked' : '' }}
-                                                    onchange="this.form.submit()"
-                                                >
-                                                <label class="form-check-label" for="isdefault-{{ $addresss->id }}">
-                                                    Make as Default address
-                                                </label>
-                                            </div>
-                                        </form>
+                                        <form action="{{ route('checkout.set.default.address', $addresss->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <div class="form-check">
+                                            <input 
+                                                class="form-check-input" 
+                                                type="radio" 
+                                                name="default_address" 
+                                                value="{{ $addresss->id }}"
+                                                id="isdefault-{{ $addresss->id }}"
+                                                {{ $addresss->isdefault ? 'checked' : '' }}
+                                                onchange="this.form.submit()"
+                                            >
+                                            <label class="form-check-label" for="isdefault-{{ $addresss->id }}">
+                                                Make as Default address
+                                            </label>
+                                        </div>
+                                    </form>
                                     </div>
                                 </div>
                             @endforeach
