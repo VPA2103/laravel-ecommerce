@@ -115,7 +115,7 @@ class CartController extends Controller
             return redirect()->route('login');
         }
 
-        $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
+        $address = Address::where('user_id', Auth::id())->get();
         return view('checkout', compact('address'));
     }
 
@@ -235,4 +235,6 @@ class CartController extends Controller
         }
         return redirect()->route('cart.index');
     }
+
+    
 }
