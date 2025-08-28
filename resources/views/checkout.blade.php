@@ -55,13 +55,13 @@
                                                     <i class="icon-edit-3"></i> Edit
                                                 </div>
                                             </a>
-                                            <form action="{{ route('user.address.delete', $addresss->id) }}" method="POST" class="delete-form">
+                                            {{-- <form action="{{ route('user.address.delete', $addresss->id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <div class="item text-danger delete">
                                                     <i class="icon-trash-2"></i> Delete
                                                 </div>
-                                            </form>
+                                            </form> --}}
                                         </div>
                                     </div>
 
