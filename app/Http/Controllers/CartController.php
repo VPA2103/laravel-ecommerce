@@ -26,7 +26,17 @@ class CartController extends Controller
 
     public function add_to_cart(Request $request)
     {
-        Cart::instance('cart')->add($request->id, $request->name, $request->quantity, $request->price)->associate('App\Models\Product');
+        Cart::instance('cart')->add([
+        'id'      => $request->id,
+        'name'    => $request->name,
+        'qty'     => $request->quantity,
+        'price'   => $request->price,
+        'options' => [
+            'color' => $request->color,
+            'size'  => $request->size,
+        ],
+        ])->associate('App\Models\Product');
+
         return redirect()->back();
     }
     public function increase_cart_quantity($rowId)
@@ -116,7 +126,8 @@ class CartController extends Controller
         }
 
         $address = Address::where('user_id', Auth::user()->id)->where('isdefault', 1)->first();
-        return view('checkout', compact('address'));
+        $fromPage = "cart";
+        return view('checkout', compact('address','fromPage'));
     }
 
     public function place_an_order(Request $request)

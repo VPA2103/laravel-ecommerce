@@ -106,7 +106,7 @@
 
                                     <!-- Nút chọn mặc định -->
                                     <div class="col-md-6">
-                                        <form action="{{ route('user.address.default', $address->id) }}" method="POST">
+                                        <form action="{{ route('user.address.default', $address->id) }}?fromPage={{ $fromPage }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <div class="form-check">

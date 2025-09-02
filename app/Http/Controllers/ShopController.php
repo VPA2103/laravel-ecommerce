@@ -60,8 +60,15 @@ class ShopController extends Controller
 
     public function product_details($product_slug)
     {
-        $product = Product::where('slug', $product_slug)->first();
-        $products = Product::where('slug', '<>', $product_slug)->get()->take(8);
-        return view('details', compact('product', 'products'));
-    }
+        $product = Product::with('variants')->where('slug', $product_slug)->firstOrFail();
+
+        // lấy thêm sản phẩm khác để gợi ý
+        $products = Product::where('slug', '<>', $product_slug)->take(8)->get();
+
+        // lấy danh sách màu và size (unique)
+        $colors = $product->variants->pluck('color')->unique();
+        $sizes  = $product->variants->pluck('size')->unique();
+
+        return view('details', compact('product', 'products', 'colors', 'sizes'));
+        }
 }
