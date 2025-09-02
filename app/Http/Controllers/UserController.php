@@ -84,8 +84,10 @@ class UserController extends Controller
         $addresses = Address::where('user_id', $user_id)
             ->orderByDesc('isdefault')
             ->get();
+        
+        $fromPage = $request->query('fromPage');
 
-        return view('user.account-address', compact('addresses'));
+        return view('user.account-address', compact('addresses', 'fromPage'));
     }
 
     public function address_add()
@@ -173,7 +175,7 @@ class UserController extends Controller
         return redirect()->route('user.account.address')->with('success', 'Address Deleted Successfully');
     }
 
-    public function address_set_default($id)
+    public function address_set_default($id, Request $request)
     {
         $user = Auth::user();
 
@@ -182,6 +184,11 @@ class UserController extends Controller
         Address::where('user_id', $user->id)
             ->where('id', $id)
             ->update(['isdefault' => true]);
+        
+        $fromPage = $request->query('fromPage');
+        if($fromPage=="cart"){
+            return redirect('checkout');
+        }
 
         return back()->with('success', 'Đã đặt địa chỉ mặc định!');
     }

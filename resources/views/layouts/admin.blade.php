@@ -42,7 +42,7 @@
                     </div>
                     <div class="center">
                         <div class="center-item">
-                            <div class="center-heading">Main Home</div>
+                            <div class="center-heading" style="margin-top: 20px;">Main Home</div>
                             <ul class="menu-list">
                                 <li class="menu-item">
                                     <a href="{{route('admin.index') }}" class="">
@@ -68,6 +68,24 @@
                                         <li class="sub-menu-item">
                                             <a href="{{route('admin.products')}}" class="">
                                                 <div class="text">Products</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-shopping-cart"></i></div>
+                                        <div class="text">Products Variants</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.products-variant.add') }}" class="">
+                                                <div class="text">Add Product Variant</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="{{ route('admin.products-variant') }}" class="">
+                                                <div class="text">Products Variant</div>
                                             </a>
                                         </li>
                                     </ul>

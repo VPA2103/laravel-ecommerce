@@ -56,7 +56,7 @@
                       </div>
                     </div>
                   </div>
-                  <a href="{{ route('user.account.address') }}" style="margin-left: 20px;">
+                  <a href="{{ route('user.account.address') }}?fromPage={{ $fromPage }}" style="margin-left: 20px;">
 
                     <button type="button" class="btn btn-primary">
                       Choose an address

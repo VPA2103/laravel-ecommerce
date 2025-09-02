@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\AuthAdmin;
+use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/account/address/edit/{id}',[UserController::class,'address_edit'])->name('user.address.edit');
      Route::post('/account/address/update/{id}', [UserController::class, 'address_update'])->name('user.address.update');
      Route::delete('/account/address/delete/{user_id}', [UserController::class, 'address_delete'])->name('user.address.delete');
-     Route::patch('/user/address/{id}/default', [App\Http\Controllers\UserController::class, 'address_set_default'])
+     Route::patch('/user/address/{id}/default', [UserController::class, 'address_set_default'])
      ->name('user.address.default');
      // Route::patch('/user/address/{id}/default', [App\Http\Controllers\UserController::class, 'setDefault'])
      //      ->name('user.address.default.checkout');
@@ -121,9 +122,15 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
      Route::get('/admin/contact',[AdminController::class,'contacts'])->name('admin.contacts');
      Route::delete('/admin/contact/{id}/delete',[AdminController::class,'contact_delete'])->name('admin.contact.delete');
 
-
      Route::get('/admin/search',[AdminController::class,'search'])->name('admin.search');
 
+     Route::get('/admin/products-variant',[AdminController::class,'products_variant'])->name('admin.products-variant');
+     Route::get('/admin/products-variant/add', [AdminController::class, 'products_variant_add'])->name('admin.products-variant.add');
+     Route::post('/admin/products-variant/store', [AdminController::class, 'products_variant_store'])->name('admin.products-variant.store');
+
+     Route::get('/product/{id}/variant', [ProductVariant::class, 'getVariant']);
+     
 
 
+     
 });

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItems;
+use App\Models\ProductVariant;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -675,5 +676,50 @@ class AdminController extends Controller
         $results = Product::where('name','LIKE',"%{$query}%")->get()->take(8);
         return response()->json($results);
         
+    }
+
+    public function products_variant()
+    {
+        $products_variant = ProductVariant::paginate(10); // Hoặc with('product') nếu cần quan hệ
+        return view('admin.products-variant', compact('products_variant'));
+    }
+
+    public function products_variant_add()
+    {
+        $products = Product::select('id', 'name','image','images')->orderBy('name')->get();
+
+        $colors = [
+            'Black', 'White', 'Red', 'Lime', 'Blue', 'Yellow', 'Cyan', 'Magenta',
+            'Silver', 'Gray', 'Maroon', 'Olive', 'Purple', 'Green', 'Teal', 'Navy',
+            'Orange', 'Brown', 'Pink', 'Gold', 'Beige', 'Violet'
+            // Có thể thêm nữa theo danh sách 140 màu CSS
+        ];
+
+        return view('admin.products-variant-add', [
+            'products' => $products,
+            'products_variant' => null,
+            'colors' => $colors
+        ]);
+    }
+    public function products_variant_store(Request $request)
+    {
+       $validated = $request->validate([
+        'product_id' => 'required|exists:products,id',
+        'color' => 'required|string|max:50',
+        'size' => 'required|string|max:10',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0'
+        ]);
+        
+    // Tạo mới
+        ProductVariant::create([
+            'product_id' => $validated['product_id'],
+            'color' => $validated['color'],
+            'size' => $validated['size'],
+            'price' => $validated['price'],
+            'stock' => $validated['stock']
+        ]);
+        return redirect()->route('admin.products-variant')->with('success', 'Thêm biến thể thành công!');
+
     }
 }
