@@ -47,5 +47,10 @@ class ProductController extends Controller
 
     return redirect()->route('admin.products')->with('success', 'Thêm sản phẩm thành công!');
     }
+
+    public function quickView(Product $product)
+    {
+        return view('product.quick-view', compact('product'));
+    }
     
 }

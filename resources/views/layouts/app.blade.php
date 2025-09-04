@@ -549,6 +549,19 @@
     </header>
     @yield('content')
 
+    <!-- Quick View Modal -->
+    <div class="modal fade" id="quickView" tabindex="-1" aria-labelledby="quickViewLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="row g-0" style="min-height: 500px;">
+                        @include('product.quick-view', ['product' => $product->id])
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr class="mt-5 text-secondary" />
     <footer class="footer footer_type_2">
         <div class="footer-middle container">
