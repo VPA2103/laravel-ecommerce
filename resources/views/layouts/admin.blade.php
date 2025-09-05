@@ -171,7 +171,7 @@
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="settings.html" class="">
+                                    <a href="{{ route('admin.setting') }}" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>
@@ -297,11 +297,11 @@
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
-                                                <span class="image">
+                                                {{-- <span class="image">
                                                     <img src="" alt="">
-                                                </span>
+                                                </span> --}}
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">Vu Viet Thang</span>
+                                                    <span class="body-title mb-2">{{Auth::user()->name}}</span>
                                                     <span class="text-tiny">Admin</span>
                                                 </span>
                                             </span>

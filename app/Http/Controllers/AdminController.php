@@ -8,7 +8,9 @@ use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItems;
 use App\Models\ProductVariant;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -721,5 +723,39 @@ class AdminController extends Controller
         ]);
         return redirect()->route('admin.products-variant')->with('success', 'Thêm biến thể thành công!');
 
+    }
+
+    public function setting()
+    {
+        $user = Auth()->user();
+        return view('admin.setting', compact('user'));
+    }
+
+    public function update_setting(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'mobile' => 'nullable|string|max:20',
+            'old_password' => 'nullable|string',
+            'new_password' => 'nullable|string|min:6|confirmed',
+        ]);
+
+        $user->name = $request->name;
+        $user->mobile = $request->mobile;
+
+        // Nếu user muốn đổi password
+        if ($request->filled('old_password') || $request->filled('new_password')) {
+            if (!Hash::check($request->old_password, $user->password)) {
+                return back()->withErrors(['old_password' => 'Mật khẩu cũ không đúng']);
+            }
+
+            $user->password = Hash::make($request->new_password);
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Cập nhật thông tin thành công!');
     }
 }
