@@ -274,15 +274,16 @@
         .logo {
             margin-left: -45px;
         }
-        .logo_foodterrrr{
+
+        .logo_foodterrrr {
             margin-top: -30px;
         }
 
-        .logo__image{
+        .logo__image {
             max-width: 220px;
         }
 
-        .product-item{
+        .product-item {
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -290,8 +291,8 @@
             transition: all 0.3s ease;
             padding-right: 5px;
         }
-        
-        .product-item .image{
+
+        .product-item .image {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -304,11 +305,11 @@
             background: #EFF4F8;
         }
 
-        #box-content-search li{
+        #box-content-search li {
             list-style: none;
         }
 
-        #box-content-search .product-item{
+        #box-content-search .product-item {
             margin-bottom: 10px;
         }
     </style>
@@ -484,8 +485,8 @@
                             <form action="#" method="GET" class="search-field container">
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
-                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text" id="search-input"
-                                        name="search-keyword" placeholder="Search products" />
+                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
+                                        id="search-input" name="search-keyword" placeholder="Search products" />
                                     <button class="btn-icon search-popup__submit" type="submit">
                                         <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -504,25 +505,25 @@
                         </div>
                     </div>
                     @guest
-                    <div class="header-tools__item hover-container">
-                        <a href="{{route('login')}}" class="header-tools__item">
-                            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
-                    </div>
+                        <div class="header-tools__item hover-container">
+                            <a href="{{route('login')}}" class="header-tools__item">
+                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
+                        </div>
                     @else
-                    <div class="header-tools__item hover-container">
-                        <a href="{{Auth::user()->utype === 'ADM' ? route('admin.index') : route('user.index')}}"
-                            class="header-tools__item">
-                            <span class="pr-6px">{{Auth::user()->name}}</span>
-                            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <use href="#icon_user" />
-                            </svg>
-                        </a>
-                    </div>
+                        <div class="header-tools__item hover-container">
+                            <a href="{{Auth::user()->utype === 'ADM' ? route('admin.index') : route('user.index')}}"
+                                class="header-tools__item">
+                                <span class="pr-6px">{{Auth::user()->name}}</span>
+                                <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_user" />
+                                </svg>
+                            </a>
+                        </div>
                     @endguest
 
                     <a href="{{route('wishlist.index')}}" class="header-tools__item header-tools__cart">
@@ -530,7 +531,8 @@
                             <use href="#icon_heart" />
                         </svg>
                         @if(Cart::instance('wishlist')->content()->count() > 0)
-                        <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
+                            <span
+                                class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('wishlist')->content()->count()}}</span>
                         @endif
                     </a>
 
@@ -540,7 +542,8 @@
                             <use href="#icon_cart" />
                         </svg>
                         @if(Cart::instance('cart')->content()->count() > 0)
-                        <span class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
+                            <span
+                                class="cart-amount d-block position-absolute js-cart-items-count">{{Cart::instance('cart')->content()->count()}}</span>
                         @endif
                     </a>
                 </div>
@@ -549,18 +552,7 @@
     </header>
     @yield('content')
 
-    <!-- Quick View Modal -->
-    <div class="modal fade" id="quickView" tabindex="-1" aria-labelledby="quickViewLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-body p-0">
-                    <div class="row g-0" style="min-height: 500px;">
-                        @include('product.quick-view', ['product' => $product->id])
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <hr class="mt-5 text-secondary" />
     <footer class="footer footer_type_2">
@@ -570,10 +562,10 @@
                     <div class="logo">
                         <div class="logo_foodterrrr">
                             <a href="{{route('home.index')}}">
-                            <img src="{{ asset('assets/images/LoGoMoi.png') }}" alt="SurfsideMedia"
-                            class="logo__image d-block" />
-                        </a>
-                        </div>                        
+                                <img src="{{ asset('assets/images/LoGoMoi.png') }}" alt="SurfsideMedia"
+                                    class="logo__image d-block" />
+                            </a>
+                        </div>
                     </div>
                     <p class="footer-address">65 Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1, TP. HCM</p>
                     <p class="m-0"><strong class="fw-medium">Vu73194@gmail.com</strong></p>
@@ -627,25 +619,29 @@
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Company</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="{{route('home.about')}}" class="menu-link menu-link_us-s">About Us</a>
+                        <li class="sub-menu__item"><a href="{{route('home.about')}}"
+                                class="menu-link menu-link_us-s">About Us</a>
                         </li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Careers</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Affiliates</a></li>
                         <li class="sub-menu__item"><a href="blog_list1.html" class="menu-link menu-link_us-s">Blog</a>
                         </li>
-                        <li class="sub-menu__item"><a href="{{route('home.contact')}}" class="menu-link menu-link_us-s">Contact Us</a></li>
+                        <li class="sub-menu__item"><a href="{{route('home.contact')}}"
+                                class="menu-link menu-link_us-s">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column footer-menu mb-4 mb-lg-0">
                     <h6 class="sub-menu__title text-uppercase">Shop</h6>
                     <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a></li>
+                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New
+                                Arrivals</a></li>
                         <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
                         </li>
                         <li class="sub-menu__item"><a href="shop4.html" class="menu-link menu-link_us-s">Men</a></li>
                         <li class="sub-menu__item"><a href="shop5.html" class="menu-link menu-link_us-s">Women</a></li>
-                        <li class="sub-menu__item"><a href="{{route('shop.index')}}" class="menu-link menu-link_us-s">Shop All</a>
+                        <li class="sub-menu__item"><a href="{{route('shop.index')}}"
+                                class="menu-link menu-link_us-s">Shop All</a>
                         </li>
                     </ul>
                 </div>
@@ -655,9 +651,11 @@
                     <ul class="sub-menu__list list-unstyled">
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Customer Service</a>
                         </li>
-                        <li class="sub-menu__item"><a href="{{route('user.index')}}" class="menu-link menu-link_us-s">My Account</a>
+                        <li class="sub-menu__item"><a href="{{route('user.index')}}" class="menu-link menu-link_us-s">My
+                                Account</a>
                         </li>
-                        <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a Store</a>
+                        <li class="sub-menu__item"><a href="store_location.html" class="menu-link menu-link_us-s">Find a
+                                Store</a>
                         </li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Legal & Privacy</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Gift Card</a></li>
@@ -671,7 +669,8 @@
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Jeans</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Shoes</a></li>
                         <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Bags</a></li>
-                        <li class="sub-menu__item"><a href="{{route('shop.index')}}" class="menu-link menu-link_us-s">Shop All</a></li>
+                        <li class="sub-menu__item"><a href="{{route('shop.index')}}"
+                                class="menu-link menu-link_us-s">Shop All</a></li>
                     </ul>
                 </div>
             </div>
@@ -733,24 +732,25 @@
     <script src="{{ asset('assets/js/plugins/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/bootstrap-slider.min.js') }}"></script>
-     <script src="{{ asset('js/sweetalert.min.js') }}"></script>   
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(function(){
-            $("#search-input").on("keyup",function(){
+        $(function () {
+            $("#search-input").on("keyup", function () {
                 var searchQuery = $(this).val();
-                if(searchQuery.length > 2 ){
+                if (searchQuery.length > 2) {
                     $.ajax({
                         type: "GET",
                         url: "{{ route('home.search') }}",
-                        data: {query: searchQuery},
+                        data: { query: searchQuery },
                         dataType: 'json',
-                        success: function(data){
+                        success: function (data) {
                             $("#box-content-search").html('');
-                            $.each(data,function(index,item){
+                            $.each(data, function (index, item) {
                                 var url = "{{ route('shop.product.details', ['product_slug' => 'product_slug_pls']) }}";
-                                var link = url.replace('product_slug_pls',item.slug);
+                                var link = url.replace('product_slug_pls', item.slug);
                                 $('#box-content-search').append(`
                                     <li>
                                         <ul>
@@ -776,6 +776,7 @@
                 }
             });
         });
+
     </script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     @stack("scripts")

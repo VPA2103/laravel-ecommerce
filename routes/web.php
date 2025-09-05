@@ -30,7 +30,8 @@ Route::controller(GoogleController::class)->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product_slug}', [ShopController::class, 'product_details'])->name('shop.product.details');
-Route::get('/product/quick-view/{product}', [ProductController::class, 'quickView'])->name('product.quick-view');
+Route::get('/product/quick-view/{id}', [ProductController::class, 'quickView'])->name('product.quick-view');
+
 
 
 
