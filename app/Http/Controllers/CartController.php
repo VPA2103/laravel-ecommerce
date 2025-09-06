@@ -32,8 +32,8 @@ class CartController extends Controller
         'qty'     => $request->quantity,
         'price'   => $request->price,
         'options' => [
-            'color' => $request->color,
-            'size'  => $request->size,
+        'color' => $request->color,
+        'size'  => $request->size,
         ],
         ])->associate('App\Models\Product');
 
@@ -188,6 +188,8 @@ class CartController extends Controller
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
+            $orderItem->size       = $item->options->size ?? null;   // thêm size
+            $orderItem->color      = $item->options->color ?? null;
             $orderItem->save();
         }
 
