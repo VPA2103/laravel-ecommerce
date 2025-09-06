@@ -6,57 +6,6 @@
             color: lightcoral;
         }
 
-        .btn-size {
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 6px 16px;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.2s;
-        }
-
-        .btn-size span {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .btn-size:hover {
-            border-color: #000;
-        }
-
-        .btn-size input:checked+span {
-            font-weight: bold;
-            color: #fff;
-            background-color: #000;
-            padding: 6px 16px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        .product-single__addtolinks {
-            display: block;
-            /* thay vì flex, để mọi thứ xếp dọc */
-        }
-
-        .product-single__meta-info {
-            margin-top: 15px;
-            /* tạo khoảng cách với Wishlist/Share */
-        }
-
-        .product-single__addtolinks {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            /* khoảng cách giữa Wishlist và Share */
-            flex-wrap: wrap;
-        }
-
-        .product-single__meta-info {
-            flex-basis: 100%;
-            /* ép nó chiếm nguyên hàng => xuống dưới */
-            margin-top: 10px;
-        }
-
         .swatch-color {
             display: inline-block;
             width: 40px;
@@ -78,6 +27,62 @@
         /* Khi hover */
         .swatch-color:hover {
             border: 2px solid #aaa;
+        }
+
+        /* Size Buttons */
+        .btn-size {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-size span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000;
+        }
+
+        .btn-size:hover {
+            border-color: #000;
+        }
+
+        .btn-size input:checked+span {
+            font-weight: bold;
+            color: #000;
+            /* Giữ màu chữ nổi bật */
+            background-color: #e7f1ff;
+            /* Nền sáng */
+            border-radius: 6px;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+            /* Căn chữ giữa ô */
+        }
+
+        /* Wishlist heart */
+        .filled-heart {
+            color: lightcoral;
+        }
+
+        /* Layout */
+        .product-single__addtolinks {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .product-single__meta-info {
+            flex-basis: 100%;
+            margin-top: 10px;
         }
     </style>
     <main class="pt-90">
@@ -202,22 +207,22 @@
                             <div class="product-single__addtocart">
                                 <div class="mb-3">
                                     <label class="form-label fw-bold d-block">
-                                        Color: <span id="selectedColor"></span>
+                                        Color: <span id="selectedColorText">None</span>
                                     </label>
 
-                                    <div class="d-flex flex-wrap gap-2">
+                                    <div class="d-flex flex-wrap gap-2" id="colorSwatches">
                                         @foreach($colors as $color)
-                                            <a href="#" class="swatch-color js-filter" data-color="{{ $color }}"
-                                                style="display:inline-block; width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};"
-                                                title="{{ ucfirst($color) }}">
+                                            <a href="javascript:void(0)" class="swatch-color js-filter" data-color="{{ $color }}"
+                                            title="{{ ucfirst($color) }}"
+                                            style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};">
                                             </a>
                                         @endforeach
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-bold d-block">
-                                            Size: <span id="selectedSize"></span>
+                                            Size: <span id="selectedSize">None</span>
                                         </label>
-                                        <div class="d-flex gap-2">
+                                        <div class="d-flex gap-2 flex-wrap">
                                             @foreach($sizes as $size)
                                                 <label class="btn-size">
                                                     <input type="radio" name="size" value="{{ $size }}" hidden>
@@ -249,11 +254,10 @@
                         @if(Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
                             <form method="POST"
                                 action="{{ route('wishlist.item.remove', ['rowId' => Cart::instance('wishlist')->content()->where('id', $product->id)->first()->rowId]) }}"
-                                id="frm-remove-item">
+                                class="wishlist-form">
                                 @csrf
                                 @method('DELETE')
-                                <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart"
-                                    onclick="document.getElementById('frm-remove-item').submit();">
+                                <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist filled-heart">
                                     <svg width="16" height="16" viewBox="0 0 20 20" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <use href="#icon_heart" />
@@ -279,6 +283,7 @@
                                     </svg>
                                     <span>Add to Wishlist</span>
                                 </a>
+
 
                             </form>
 
@@ -522,38 +527,38 @@
 
             <div id="related_products" class="position-relative">
                 <div class="swiper-container js-swiper-slider" data-settings='{
-                                            "autoplay": false,
-                                            "slidesPerView": 4,
-                                            "slidesPerGroup": 4,
-                                            "effect": "none",
-                                            "loop": true,
-                                            "pagination": {
-                                              "el": "#related_products .products-pagination",
-                                              "type": "bullets",
-                                              "clickable": true
-                                            },
-                                            "navigation": {
-                                              "nextEl": "#related_products .products-carousel__next",
-                                              "prevEl": "#related_products .products-carousel__prev"
-                                            },
-                                            "breakpoints": {
-                                              "320": {
-                                                "slidesPerView": 2,
-                                                "slidesPerGroup": 2,
-                                                "spaceBetween": 14
-                                              },
-                                              "768": {
-                                                "slidesPerView": 3,
-                                                "slidesPerGroup": 3,
-                                                "spaceBetween": 24
-                                              },
-                                              "992": {
-                                                "slidesPerView": 4,
-                                                "slidesPerGroup": 4,
-                                                "spaceBetween": 30
-                                              }
-                                            }
-                                          }'>
+                                                            "autoplay": false,
+                                                            "slidesPerView": 4,
+                                                            "slidesPerGroup": 4,
+                                                            "effect": "none",
+                                                            "loop": true,
+                                                            "pagination": {
+                                                              "el": "#related_products .products-pagination",
+                                                              "type": "bullets",
+                                                              "clickable": true
+                                                            },
+                                                            "navigation": {
+                                                              "nextEl": "#related_products .products-carousel__next",
+                                                              "prevEl": "#related_products .products-carousel__prev"
+                                                            },
+                                                            "breakpoints": {
+                                                              "320": {
+                                                                "slidesPerView": 2,
+                                                                "slidesPerGroup": 2,
+                                                                "spaceBetween": 14
+                                                              },
+                                                              "768": {
+                                                                "slidesPerView": 3,
+                                                                "slidesPerGroup": 3,
+                                                                "spaceBetween": 24
+                                                              },
+                                                              "992": {
+                                                                "slidesPerView": 4,
+                                                                "slidesPerGroup": 4,
+                                                                "spaceBetween": 30
+                                                              }
+                                                            }
+                                                          }'>
                     <div class="swiper-wrapper">
                         @foreach ($products as $rproduct)
                             <div class="swiper-slide product-card">
@@ -640,85 +645,68 @@
     document.addEventListener("DOMContentLoaded", function () {
         const colorEls = document.querySelectorAll(".swatch-color");
         const sizeEls = document.querySelectorAll("input[name='size']");
+        const selectedColorEl = document.getElementById("selectedColor");
+        const selectedSizeEl = document.getElementById("selectedSize");
 
-        let selectedColor = null;
-        let selectedSize = null;
+        const inputColor = document.getElementById("inputColor");
+        const inputSize = document.getElementById("inputSize");
 
+        // Color selection
         colorEls.forEach(el => {
-            el.addEventListener("click", e => {
-                e.preventDefault();
+        el.addEventListener("click", function () {
+            const color = el.dataset.color;
 
-                // Xóa class active cũ
-                colorEls.forEach(c => c.classList.remove("active"));
-                // Thêm class active vào màu được chọn
-                el.classList.add("active");
+            // Hiển thị chữ màu thay vì ô trống
+            selectedColorText.textContent = color;
 
-                selectedColor = el.dataset.color;
-                fetchVariant();
-            });
+            // Gán giá trị vào input hidden để submit
+            inputColor.value = color;
+
+            // Highlight ô màu được chọn
+            colorEls.forEach(c => c.classList.remove('swatch_active'));
+            el.classList.add('swatch_active');
         });
+    });
 
+        // Size selection
         sizeEls.forEach(el => {
-            el.addEventListener("change", e => {
-                selectedSize = e.target.value;
-                fetchVariant();
+            el.addEventListener("change", function () {
+                selectedSizeEl.textContent = el.value;
+                inputSize.value = el.value; // set value để gửi form
+
+                document.querySelectorAll('.btn-size').forEach(label => label.classList.remove('size_active'));
+                this.closest('.btn-size').classList.add('size_active');
             });
         });
+    });
 
-        function fetchVariant() {
-            if (!selectedColor || !selectedSize) return;
 
-            fetch(`/product/{{ $product->id }}/variant?color=${selectedColor}&size=${selectedSize}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data) {
-                        document.querySelector("#price").textContent = data.price + " VND";
-                        document.querySelector("#stock").textContent = "Còn lại: " + data.stock;
-                    }
-                });
-        }
-        document.querySelectorAll('.swatch-color').forEach(item => {
-            item.addEventListener('click', function (e) {
-                e.preventDefault();
-                let colorName = this.getAttribute('title'); // chữ hiển thị
-                document.getElementById('selectedColor').textContent = colorName;
+    document.querySelectorAll('input[name="size"]').forEach(input => {
+        input.addEventListener('change', function () {
+            document.getElementById('selectedSize').textContent = this.value;
+
+            // Xóa trạng thái chọn cũ
+            document.querySelectorAll('.btn-size').forEach(label => {
+                label.classList.remove('active');
             });
+
+            // Thêm class active cho label đang chọn
+            this.closest('.btn-size').classList.add('active');
         });
+    });
 
-        document.querySelectorAll('.btn-size input').forEach(item => {
-            item.addEventListener('change', function () {
-                let sizeValue = this.value;
-                document.getElementById('selectedSize').textContent = sizeValue;
-            });
+    document.querySelectorAll('.swatch-color input').forEach(input => {
+        input.addEventListener('change', function () {
+            document.querySelectorAll('.swatch-color').forEach(s => s.classList.remove('swatch_active'));
+            this.parentElement.classList.add('swatch_active');
         });
-        document.querySelectorAll('.swatch-color').forEach(el => {
-            el.addEventListener('click', function (e) {
-                e.preventDefault();
-                let color = this.dataset.color;
-                document.getElementById('selectedColor').textContent = color;
-                document.getElementById('inputColor').value = color;
-            });
-        });
+    });
 
-        // chọn size
-        document.querySelectorAll('.btn-size input').forEach(el => {
-            el.addEventListener('change', function () {
-                let size = this.value;
-                document.getElementById('selectedSize').textContent = size;
-                document.getElementById('inputSize').value = size;
-            });
-        });
-
-        document.querySelectorAll('.color-option').forEach(option => {
-            option.addEventListener('click', function () {
-                document.getElementById('inputColor').value = this.dataset.color;
-            });
-        });
-
-        document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function () {
-                document.getElementById('inputSize').value = this.dataset.size;
-            });
+    // Size
+    document.querySelectorAll('.btn-size input').forEach(input => {
+        input.addEventListener('change', function () {
+            document.querySelectorAll('.btn-size').forEach(b => b.classList.remove('size_active'));
+            this.parentElement.classList.add('size_active');
         });
     });
 </script>
