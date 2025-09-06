@@ -43,17 +43,15 @@ class ShopController extends Controller
         $brands = Brand::orderBy('name', 'ASC')->get();
         $categories = Category::orderBy('name', 'ASC')->get();
 
-        $products = Product::where(function ($query) use ($f_brands) 
-        {
+        $products = Product::where(function ($query) use ($f_brands) {
             $query->whereIn('brand_id', explode(',', $f_brands))->orWhereRaw("'" . $f_brands . "'=''");
-        })->where(function ($query) use ($f_categories) 
-        {
+        })->where(function ($query) use ($f_categories) {
             $query->whereIn('category_id', explode(',', $f_categories))->orWhereRaw("'" . $f_categories . "'=''");
         })
-        ->where(function($query) use($min_price , $max_price){
-            $query->whereBetween('regular_price',[$min_price,$max_price])
-            ->orWhereBetween('sale_price',[$min_price,$max_price]);
-        })
+            ->where(function ($query) use ($min_price, $max_price) {
+                $query->whereBetween('regular_price', [$min_price, $max_price])
+                    ->orWhereBetween('sale_price', [$min_price, $max_price]);
+            })
             ->orderBy($o_column, $o_order)->paginate($size);
         return view('shop', compact('products', 'size', 'order', 'brands', 'f_brands', 'categories', 'f_categories', 'min_price', 'max_price'));
     }
@@ -62,13 +60,13 @@ class ShopController extends Controller
     {
         $product = Product::with('variants')->where('slug', $product_slug)->firstOrFail();
 
-        // lấy thêm sản phẩm khác để gợi ý
         $products = Product::where('slug', '<>', $product_slug)->take(8)->get();
 
-        // lấy danh sách màu và size (unique)
         $colors = $product->variants->pluck('color')->unique();
-        $sizes  = $product->variants->pluck('size')->unique();
+        $sizes = $product->variants->pluck('size')->unique();
 
         return view('details', compact('product', 'products', 'colors', 'sizes'));
-        }
+    }
+
+    
 }

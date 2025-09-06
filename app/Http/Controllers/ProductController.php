@@ -47,5 +47,18 @@ class ProductController extends Controller
 
     return redirect()->route('admin.products')->with('success', 'Thêm sản phẩm thành công!');
     }
-    
+
+    public function quickView($id)
+    {
+        $product = Product::with('category')->findOrFail($id);
+
+        $colors = $product->colors ? explode(',', $product->colors) : [];
+        $sizes = $product->sizes ? explode(',', $product->sizes) : [];
+
+        return view('product.quick-view', compact('product', 'colors', 'sizes'));
+    }
+
+
+
+
 }
