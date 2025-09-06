@@ -1,14 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <main>
-        <section class="swiper-container js-swiper-slider swiper-number-pagination slideshow" data-settings='{
-                                                                                                                    "autoplay": {
-                                                                                                                      "delay": 5000
-                                                                                                                    },
-                                                                                                                    "slidesPerView": 1,
-                                                                                                                    "effect": "fade",
-                                                                                                                    "loop": true
-                                                                                                                  }'>
+        <section class="swiper-container js-swiper-slider swiper-number-pagination slideshow"
+            data-settings='{
+                                                                                                                                            "autoplay": {
+                                                                                                                                              "delay": 5000
+                                                                                                                                            },
+                                                                                                                                            "slidesPerView": 1,
+                                                                                                                                            "effect": "fade",
+                                                                                                                                            "loop": true
+                                                                                                                                          }'>
             <div class="swiper-wrapper">
                 @foreach ($slides as $slide)
                     <div class="swiper-slide">
@@ -54,43 +55,44 @@
                 <h2 class="section-title text-center mb-3 pb-xl-2 mb-xl-4">You Might Like</h2>
 
                 <div class="position-relative">
-                    <div class="swiper-container js-swiper-slider" data-settings='{
-                                                                                                                          "autoplay": {
-                                                                                                                            "delay": 5000
-                                                                                                                          },
-                                                                                                                          "slidesPerView": 8,
-                                                                                                                          "slidesPerGroup": 1,
-                                                                                                                          "effect": "none",
-                                                                                                                          "loop": true,
-                                                                                                                          "navigation": {
-                                                                                                                            "nextEl": ".products-carousel__next-1",
-                                                                                                                            "prevEl": ".products-carousel__prev-1"
-                                                                                                                          },
-                                                                                                                          "breakpoints": {
-                                                                                                                            "320": {
-                                                                                                                              "slidesPerView": 2,
-                                                                                                                              "slidesPerGroup": 2,
-                                                                                                                              "spaceBetween": 15
-                                                                                                                            },
-                                                                                                                            "768": {
-                                                                                                                              "slidesPerView": 4,
-                                                                                                                              "slidesPerGroup": 4,
-                                                                                                                              "spaceBetween": 30
-                                                                                                                            },
-                                                                                                                            "992": {
-                                                                                                                              "slidesPerView": 6,
-                                                                                                                              "slidesPerGroup": 1,
-                                                                                                                              "spaceBetween": 45,
-                                                                                                                              "pagination": false
-                                                                                                                            },
-                                                                                                                            "1200": {
-                                                                                                                              "slidesPerView": 8,
-                                                                                                                              "slidesPerGroup": 1,
-                                                                                                                              "spaceBetween": 60,
-                                                                                                                              "pagination": false
-                                                                                                                            }
-                                                                                                                          }
-                                                                                                                        }'>
+                    <div class="swiper-container js-swiper-slider"
+                        data-settings='{
+                                                                                                                                                  "autoplay": {
+                                                                                                                                                    "delay": 5000
+                                                                                                                                                  },
+                                                                                                                                                  "slidesPerView": 8,
+                                                                                                                                                  "slidesPerGroup": 1,
+                                                                                                                                                  "effect": "none",
+                                                                                                                                                  "loop": true,
+                                                                                                                                                  "navigation": {
+                                                                                                                                                    "nextEl": ".products-carousel__next-1",
+                                                                                                                                                    "prevEl": ".products-carousel__prev-1"
+                                                                                                                                                  },
+                                                                                                                                                  "breakpoints": {
+                                                                                                                                                    "320": {
+                                                                                                                                                      "slidesPerView": 2,
+                                                                                                                                                      "slidesPerGroup": 2,
+                                                                                                                                                      "spaceBetween": 15
+                                                                                                                                                    },
+                                                                                                                                                    "768": {
+                                                                                                                                                      "slidesPerView": 4,
+                                                                                                                                                      "slidesPerGroup": 4,
+                                                                                                                                                      "spaceBetween": 30
+                                                                                                                                                    },
+                                                                                                                                                    "992": {
+                                                                                                                                                      "slidesPerView": 6,
+                                                                                                                                                      "slidesPerGroup": 1,
+                                                                                                                                                      "spaceBetween": 45,
+                                                                                                                                                      "pagination": false
+                                                                                                                                                    },
+                                                                                                                                                    "1200": {
+                                                                                                                                                      "slidesPerView": 8,
+                                                                                                                                                      "slidesPerGroup": 1,
+                                                                                                                                                      "spaceBetween": 60,
+                                                                                                                                                      "pagination": false
+                                                                                                                                                    }
+                                                                                                                                                  }
+                                                                                                                                                }'>
                         <div class="swiper-wrapper">
                             @foreach ($categories as $category)
                                 <div class="swiper-slide">
@@ -161,38 +163,38 @@
                         <div class="position-relative">
                             <div class="swiper-container js-swiper-slider"
                                 data-settings='{
-                                                                                                                              "autoplay": {
-                                                                                                                                "delay": 5000
-                                                                                                                              },
-                                                                                                                              "slidesPerView": 4,
-                                                                                                                              "slidesPerGroup": 4,
-                                                                                                                              "effect": "none",
-                                                                                                                              "loop": false,
-                                                                                                                              "breakpoints": {
-                                                                                                                                "320": {
-                                                                                                                                  "slidesPerView": 2,
-                                                                                                                                  "slidesPerGroup": 2,
-                                                                                                                                  "spaceBetween": 14
-                                                                                                                                },
-                                                                                                                                "768": {
-                                                                                                                                  "slidesPerView": 2,
-                                                                                                                                  "slidesPerGroup": 3,
-                                                                                                                                  "spaceBetween": 24
-                                                                                                                                },
-                                                                                                                                "992": {
-                                                                                                                                  "slidesPerView": 3,
-                                                                                                                                  "slidesPerGroup": 1,
-                                                                                                                                  "spaceBetween": 30,
-                                                                                                                                  "pagination": false
-                                                                                                                                },
-                                                                                                                                "1200": {
-                                                                                                                                  "slidesPerView": 4,
-                                                                                                                                  "slidesPerGroup": 1,
-                                                                                                                                  "spaceBetween": 30,
-                                                                                                                                  "pagination": false
-                                                                                                                                }
-                                                                                                                              }
-                                                                                                                            }'>
+                                                                                                                                                      "autoplay": {
+                                                                                                                                                        "delay": 5000
+                                                                                                                                                      },
+                                                                                                                                                      "slidesPerView": 4,
+                                                                                                                                                      "slidesPerGroup": 4,
+                                                                                                                                                      "effect": "none",
+                                                                                                                                                      "loop": false,
+                                                                                                                                                      "breakpoints": {
+                                                                                                                                                        "320": {
+                                                                                                                                                          "slidesPerView": 2,
+                                                                                                                                                          "slidesPerGroup": 2,
+                                                                                                                                                          "spaceBetween": 14
+                                                                                                                                                        },
+                                                                                                                                                        "768": {
+                                                                                                                                                          "slidesPerView": 2,
+                                                                                                                                                          "slidesPerGroup": 3,
+                                                                                                                                                          "spaceBetween": 24
+                                                                                                                                                        },
+                                                                                                                                                        "992": {
+                                                                                                                                                          "slidesPerView": 3,
+                                                                                                                                                          "slidesPerGroup": 1,
+                                                                                                                                                          "spaceBetween": 30,
+                                                                                                                                                          "pagination": false
+                                                                                                                                                        },
+                                                                                                                                                        "1200": {
+                                                                                                                                                          "slidesPerView": 4,
+                                                                                                                                                          "slidesPerGroup": 1,
+                                                                                                                                                          "spaceBetween": 30,
+                                                                                                                                                          "pagination": false
+                                                                                                                                                        }
+                                                                                                                                                      }
+                                                                                                                                                    }'>
                                 <div class="swiper-wrapper">
                                     @foreach($sproducts as $sproduct)
                                         <div class="swiper-slide product-card product-card_style3">
@@ -297,7 +299,8 @@
                                         </button>
 
 
-                                        <button class="btn-link btn-link_lg js-quick-view" data-url="{{ route('product.quick-view', $fproduct->id) }}">
+                                        <button class="btn-link btn-link_lg js-quick-view"
+                                            data-url="{{ route('product.quick-view', $fproduct->id) }}">
                                             Quick View
                                         </button>
 
