@@ -11,20 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-            Schema::create('order_items', function (Blueprint $table) {
+       Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('order_id')->unsigned();
-            $table->decimal('price');
-            $table->integer('quantity');
-            $table->string('size'); 
-            $table->string('color');
-            $table->longText('options')->nullable();
-            $table->boolean('rstatus')->default(false);
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('order_id');
+            $table->tinyInteger('rating'); // 1-5 sao
+            $table->text('comment')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-
         });
     }
 
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_items');
+        Schema::dropIfExists('reviews');
     }
 };

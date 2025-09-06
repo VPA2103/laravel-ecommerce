@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Middleware\AuthAdmin;
 use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Route;
@@ -133,6 +134,7 @@ Route::middleware(['auth', AuthAdmin::class])->group(function () {
      Route::get('/product/{id}/variant', [ProductVariant::class, 'getVariant']);
      
 
-
+//      Route::post('/orders/{order_id}/product/{product_id}/review', [ReviewController::class, 'store'])
+//     ->name('review.store');
      
 });

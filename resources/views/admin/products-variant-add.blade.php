@@ -45,7 +45,7 @@
                     <fieldset class="name">
                         <div class="body-title">Product Name <span class="tf-color-1">*</span></div>
                         <select name="product_id" class="form-control" required>
-                            <option value="">-- Choose product --</option>
+                            <option value="">Choose Product</option>
                             @foreach($products as $product)
                                 <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
                                     {{ $product->name }}
@@ -60,7 +60,7 @@
                     <fieldset class="name">
                         <div class="body-title">Color <span class="tf-color-1">*</span></div>
                         <select name="color" class="form-select" required>
-                            <option value="">-- Select Color --</option>
+                            <option value="">Choose Color</option>
                             @foreach($colors as $color)
                                 <option value="{{ strtolower($color) }}" {{ (isset($products_variant) && strtolower($products_variant->color ?? '') === strtolower($color)) ? 'selected' : '' }}>
                                     {{ $color }}
@@ -75,11 +75,14 @@
                     <fieldset class="name">
                         <div class="body-title">Size <span class="tf-color-1">*</span></div>
                         <select name="size" class="form-control" required>
-                            <option value="">-- Choose size --</option>
+                            <option value="">Choose Zize</option>
+                            <option value="S" {{ (isset($products_variant) && $products_variant->size == 'XS') ? 'selected' : '' }}>XS</option>
                             <option value="S" {{ (isset($products_variant) && $products_variant->size == 'S') ? 'selected' : '' }}>S</option>
                             <option value="M" {{ (isset($products_variant) && $products_variant->size == 'M') ? 'selected' : '' }}>M</option>
                             <option value="L" {{ (isset($products_variant) && $products_variant->size == 'L') ? 'selected' : '' }}>L</option>
                             <option value="XL" {{ (isset($products_variant) && $products_variant->size == 'XL') ? 'selected' : '' }}>XL</option>
+                            <option value="XL" {{ (isset($products_variant) && $products_variant->size == 'XXL') ? 'selected' : '' }}>XXL</option>
+                            <option value="XL" {{ (isset($products_variant) && $products_variant->size == 'XXXL') ? 'selected' : '' }}>XXXL</option>
                         </select>
                     </fieldset>
                     @error('size')

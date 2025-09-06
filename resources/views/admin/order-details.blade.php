@@ -87,6 +87,8 @@
                                 <th class="text-center">SKU</th>
                                 <th class="text-center">Category</th>
                                 <th class="text-center">Brand</th>
+                                <th class="text-center">Color</th>
+                                <th class="text-center">Size</th>
                                 <th class="text-center">Options</th>
                                 <th class="text-center">Return Status</th>
                                 <th class="text-center">Action</th>
@@ -97,7 +99,7 @@
                             <tr>
                                 <td class="pname">
                                     <div class="image">
-                                        <img src="{{ asset('upload/products/thumbnails') }}/{{ $item->product->image }}" alt="{{$item->product->name}}" class="image">
+                                        <img src="{{ asset('uploads/products/thumbnails') }}/{{ $item->product->image }}" alt="{{$item->product->name}}" class="image">
                                     </div>
                                     <div class="name">
                                         <a href="{{ route('shop.product.details', ['product_slug' => $item->product->slug]) }}" target="_blank"
@@ -108,7 +110,9 @@
                                 <td class="text-center">{{$item->quantity}}</td>
                                 <td class="text-center">{{$item->product->SKU}}</td>
                                 <td class="text-center">{{$item->product->category->name}}</td>
-                                <td class="text-center">{{$item->product->brand->name}}</td>
+                                <td class="text-center">{{$item->product->brand->name}}</td>                               
+                                <td class="text-center">{{ $item->color ?? '-' }}</td>
+                                <td class="text-center">{{ $item->size ?? '-' }}</td>
                                 <td class="text-center">{{$item->option}}</td>
                                 <td class="text-center">{{$item->rstatus == 0 ? "No" : "Yes"}}</td>
                                 <td class="text-center">
