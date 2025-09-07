@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <style>
         .filled-heart {
@@ -213,8 +212,8 @@
                                     <div class="d-flex flex-wrap gap-2" id="colorSwatches">
                                         @foreach($colors as $color)
                                             <a href="javascript:void(0)" class="swatch-color js-filter" data-color="{{ $color }}"
-                                            title="{{ ucfirst($color) }}"
-                                            style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};">
+                                                title="{{ ucfirst($color) }}"
+                                                style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};">
                                             </a>
                                         @endforeach
                                     </div>
@@ -248,8 +247,10 @@
                                     <input type="hidden" name="color" id="inputColor">
                                     <input type="hidden" name="size" id="inputSize">
                                 </div>
+                            </div>
                         </form>
                     @endif
+
                     <div class="product-single__addtolinks">
                         @if(Cart::instance('wishlist')->content()->where('id', $product->id)->count() > 0)
                             <form method="POST"
@@ -340,6 +341,7 @@
 
                 </div>
             </div>
+
             <div class="product-single__details-tab">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -527,38 +529,38 @@
 
             <div id="related_products" class="position-relative">
                 <div class="swiper-container js-swiper-slider" data-settings='{
-                                                            "autoplay": false,
-                                                            "slidesPerView": 4,
-                                                            "slidesPerGroup": 4,
-                                                            "effect": "none",
-                                                            "loop": true,
-                                                            "pagination": {
-                                                              "el": "#related_products .products-pagination",
-                                                              "type": "bullets",
-                                                              "clickable": true
-                                                            },
-                                                            "navigation": {
-                                                              "nextEl": "#related_products .products-carousel__next",
-                                                              "prevEl": "#related_products .products-carousel__prev"
-                                                            },
-                                                            "breakpoints": {
-                                                              "320": {
-                                                                "slidesPerView": 2,
-                                                                "slidesPerGroup": 2,
-                                                                "spaceBetween": 14
-                                                              },
-                                                              "768": {
-                                                                "slidesPerView": 3,
-                                                                "slidesPerGroup": 3,
-                                                                "spaceBetween": 24
-                                                              },
-                                                              "992": {
-                                                                "slidesPerView": 4,
-                                                                "slidesPerGroup": 4,
-                                                                "spaceBetween": 30
-                                                              }
-                                                            }
-                                                          }'>
+                                                    "autoplay": false,
+                                                    "slidesPerView": 4,
+                                                    "slidesPerGroup": 4,
+                                                    "effect": "none",
+                                                    "loop": true,
+                                                    "pagination": {
+                                                      "el": "#related_products .products-pagination",
+                                                      "type": "bullets",
+                                                      "clickable": true
+                                                    },
+                                                    "navigation": {
+                                                      "nextEl": "#related_products .products-carousel__next",
+                                                      "prevEl": "#related_products .products-carousel__prev"
+                                                    },
+                                                    "breakpoints": {
+                                                      "320": {
+                                                        "slidesPerView": 2,
+                                                        "slidesPerGroup": 2,
+                                                        "spaceBetween": 14
+                                                      },
+                                                      "768": {
+                                                        "slidesPerView": 3,
+                                                        "slidesPerGroup": 3,
+                                                        "spaceBetween": 24
+                                                      },
+                                                      "992": {
+                                                        "slidesPerView": 4,
+                                                        "slidesPerGroup": 4,
+                                                        "spaceBetween": 30
+                                                      }
+                                                    }
+                                                  }'>
                     <div class="swiper-wrapper">
                         @foreach ($products as $rproduct)
                             <div class="swiper-slide product-card">
@@ -635,11 +637,10 @@
 
                 <div class="products-pagination mt-4 mb-5 d-flex align-items-center justify-content-center"></div>
                 <!-- /.products-pagination -->
-            </div><!-- /.position-relative -->
+            </div>
 
-        </section><!-- /.products-carousel container -->
+        </section>
     </main>
-
 @endsection
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -653,20 +654,20 @@
 
         // Color selection
         colorEls.forEach(el => {
-        el.addEventListener("click", function () {
-            const color = el.dataset.color;
+            el.addEventListener("click", function () {
+                const color = el.dataset.color;
 
-            // Hiển thị chữ màu thay vì ô trống
-            selectedColorText.textContent = color;
+                // Hiển thị chữ màu thay vì ô trống
+                selectedColorText.textContent = color;
 
-            // Gán giá trị vào input hidden để submit
-            inputColor.value = color;
+                // Gán giá trị vào input hidden để submit
+                inputColor.value = color;
 
-            // Highlight ô màu được chọn
-            colorEls.forEach(c => c.classList.remove('swatch_active'));
-            el.classList.add('swatch_active');
+                // Highlight ô màu được chọn
+                colorEls.forEach(c => c.classList.remove('swatch_active'));
+                el.classList.add('swatch_active');
+            });
         });
-    });
 
         // Size selection
         sizeEls.forEach(el => {
