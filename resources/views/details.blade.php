@@ -212,8 +212,8 @@
                                     <div class="d-flex flex-wrap gap-2" id="colorSwatches">
                                         @foreach($colors as $color)
                                             <a href="javascript:void(0)" class="swatch-color js-filter" data-color="{{ $color }}"
-                                            title="{{ ucfirst($color) }}"
-                                            style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};">
+                                                title="{{ ucfirst($color) }}"
+                                                style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};">
                                             </a>
                                         @endforeach
                                     </div>
@@ -247,6 +247,7 @@
                                     <input type="hidden" name="color" id="inputColor">
                                     <input type="hidden" name="size" id="inputSize">
                                 </div>
+                            </div>
                         </form>
                     @endif
 
@@ -528,38 +529,38 @@
 
             <div id="related_products" class="position-relative">
                 <div class="swiper-container js-swiper-slider" data-settings='{
-                                            "autoplay": false,
-                                            "slidesPerView": 4,
-                                            "slidesPerGroup": 4,
-                                            "effect": "none",
-                                            "loop": true,
-                                            "pagination": {
-                                              "el": "#related_products .products-pagination",
-                                              "type": "bullets",
-                                              "clickable": true
-                                            },
-                                            "navigation": {
-                                              "nextEl": "#related_products .products-carousel__next",
-                                              "prevEl": "#related_products .products-carousel__prev"
-                                            },
-                                            "breakpoints": {
-                                              "320": {
-                                                "slidesPerView": 2,
-                                                "slidesPerGroup": 2,
-                                                "spaceBetween": 14
-                                              },
-                                              "768": {
-                                                "slidesPerView": 3,
-                                                "slidesPerGroup": 3,
-                                                "spaceBetween": 24
-                                              },
-                                              "992": {
-                                                "slidesPerView": 4,
-                                                "slidesPerGroup": 4,
-                                                "spaceBetween": 30
-                                              }
-                                            }
-                                          }'>
+                                                    "autoplay": false,
+                                                    "slidesPerView": 4,
+                                                    "slidesPerGroup": 4,
+                                                    "effect": "none",
+                                                    "loop": true,
+                                                    "pagination": {
+                                                      "el": "#related_products .products-pagination",
+                                                      "type": "bullets",
+                                                      "clickable": true
+                                                    },
+                                                    "navigation": {
+                                                      "nextEl": "#related_products .products-carousel__next",
+                                                      "prevEl": "#related_products .products-carousel__prev"
+                                                    },
+                                                    "breakpoints": {
+                                                      "320": {
+                                                        "slidesPerView": 2,
+                                                        "slidesPerGroup": 2,
+                                                        "spaceBetween": 14
+                                                      },
+                                                      "768": {
+                                                        "slidesPerView": 3,
+                                                        "slidesPerGroup": 3,
+                                                        "spaceBetween": 24
+                                                      },
+                                                      "992": {
+                                                        "slidesPerView": 4,
+                                                        "slidesPerGroup": 4,
+                                                        "spaceBetween": 30
+                                                      }
+                                                    }
+                                                  }'>
                     <div class="swiper-wrapper">
                         @foreach ($products as $rproduct)
                             <div class="swiper-slide product-card">
@@ -640,5 +641,73 @@
 
         </section>
     </main>
-
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const colorEls = document.querySelectorAll(".swatch-color");
+        const sizeEls = document.querySelectorAll("input[name='size']");
+        const selectedColorEl = document.getElementById("selectedColor");
+        const selectedSizeEl = document.getElementById("selectedSize");
+
+        const inputColor = document.getElementById("inputColor");
+        const inputSize = document.getElementById("inputSize");
+
+        // Color selection
+        colorEls.forEach(el => {
+            el.addEventListener("click", function () {
+                const color = el.dataset.color;
+
+                // Hiển thị chữ màu thay vì ô trống
+                selectedColorText.textContent = color;
+
+                // Gán giá trị vào input hidden để submit
+                inputColor.value = color;
+
+                // Highlight ô màu được chọn
+                colorEls.forEach(c => c.classList.remove('swatch_active'));
+                el.classList.add('swatch_active');
+            });
+        });
+
+        // Size selection
+        sizeEls.forEach(el => {
+            el.addEventListener("change", function () {
+                selectedSizeEl.textContent = el.value;
+                inputSize.value = el.value; // set value để gửi form
+
+                document.querySelectorAll('.btn-size').forEach(label => label.classList.remove('size_active'));
+                this.closest('.btn-size').classList.add('size_active');
+            });
+        });
+    });
+
+
+    document.querySelectorAll('input[name="size"]').forEach(input => {
+        input.addEventListener('change', function () {
+            document.getElementById('selectedSize').textContent = this.value;
+
+            // Xóa trạng thái chọn cũ
+            document.querySelectorAll('.btn-size').forEach(label => {
+                label.classList.remove('active');
+            });
+
+            // Thêm class active cho label đang chọn
+            this.closest('.btn-size').classList.add('active');
+        });
+    });
+
+    document.querySelectorAll('.swatch-color input').forEach(input => {
+        input.addEventListener('change', function () {
+            document.querySelectorAll('.swatch-color').forEach(s => s.classList.remove('swatch_active'));
+            this.parentElement.classList.add('swatch_active');
+        });
+    });
+
+    // Size
+    document.querySelectorAll('.btn-size input').forEach(input => {
+        input.addEventListener('change', function () {
+            document.querySelectorAll('.btn-size').forEach(b => b.classList.remove('size_active'));
+            this.parentElement.classList.add('size_active');
+        });
+    });
+</script>

@@ -123,17 +123,52 @@
 <div class="row">
     <div class="row">
         <div class="col-lg-7">
-            <div class="product-main-image">
-                <img src="{{ asset('uploads/products') }}/{{ $product->image }}" alt="{{ $product->name }}" />
-                <a class="zoom-btn" data-fancybox="gallery" href="{{ asset('uploads/products') }}/{{ $product->image }}"
-                    data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
-                    <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_zoom" />
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {{-- Ảnh chính --}}
+                    <div class="swiper-slide product-single__image-item">
+                        <img loading="lazy" class="h-auto" src="{{ asset('uploads/products') }}/{{ $product->image }}"
+                            width="674" height="674" alt="{{ $product->name }}" />
+                        <a data-fancybox="gallery" href="{{ asset('uploads/products') }}/{{ $product->image }}"
+                            data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <use href="#icon_zoom" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    {{-- Các ảnh gallery --}}
+                    @foreach (explode(',', $product->images) as $gimg)
+                        <div class="swiper-slide product-single__image-item">
+                            <img loading="lazy" class="h-auto" src="{{ asset('uploads/products') }}/{{ $gimg }}" width="674"
+                                height="674" alt="" />
+                            <a data-fancybox="gallery" href="{{ asset('uploads/products') }}/{{ $gimg }}"
+                                data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#icon_zoom" />
+                                </svg>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Nút điều hướng --}}
+                <div class="swiper-button-prev">
+                    <svg width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
+                        <use href="#icon_prev_sm" />
                     </svg>
-                </a>
+                </div>
+                <div class="swiper-button-next">
+                    <svg width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
+                        <use href="#icon_next_sm" />
+                    </svg>
+                </div>
             </div>
         </div>
-        <div class="col-lg-5 " >
+
+        <div class="col-lg-5 ">
             <div class="d-flex justify-content-between mb-4 pb-md-2">
                 <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
                     <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
@@ -192,22 +227,22 @@
                     <div class="product-single__addtocart">
                         <div class="mb-3">
                             <label class="form-label fw-bold d-block">
-                                Color: <span id="selectedColor"></span>
+                                Color: <span id="selectedColorText">None</span>
                             </label>
 
-                            <div class="d-flex flex-wrap gap-2">
+                            <div class="d-flex flex-wrap gap-2" id="colorSwatches">
                                 @foreach($colors as $color)
-                                    <a href="#" class="swatch-color js-filter" data-color="{{ $color }}"
-                                        style="display:inline-block; width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};"
-                                        title="{{ ucfirst($color) }}">
+                                    <a href="javascript:void(0)" class="swatch-color js-filter" data-color="{{ $color }}"
+                                        title="{{ ucfirst($color) }}"
+                                        style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};">
                                     </a>
                                 @endforeach
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold d-block">
-                                    Size: <span id="selectedSize"></span>
+                                    Size: <span id="selectedSize">None</span>
                                 </label>
-                                <div class="d-flex gap-2">
+                                <div class="d-flex gap-2 flex-wrap">
                                     @foreach($sizes as $size)
                                         <label class="btn-size">
                                             <input type="radio" name="size" value="{{ $size }}" hidden>
@@ -233,6 +268,7 @@
                             <input type="hidden" name="color" id="inputColor">
                             <input type="hidden" name="size" id="inputSize">
                         </div>
+                    </div>
                 </form>
             @endif
 
@@ -324,3 +360,80 @@
     </div>
 
 </div>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        loop: true
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const colorEls = document.querySelectorAll(".swatch-color");
+        const sizeEls = document.querySelectorAll("input[name='size']");
+        const selectedColorEl = document.getElementById("selectedColor");
+        const selectedSizeEl = document.getElementById("selectedSize");
+
+        const inputColor = document.getElementById("inputColor");
+        const inputSize = document.getElementById("inputSize");
+
+        // Color selection
+        colorEls.forEach(el => {
+            el.addEventListener("click", function () {
+                const color = el.dataset.color;
+
+                // Hiển thị chữ màu thay vì ô trống
+                selectedColorText.textContent = color;
+
+                // Gán giá trị vào input hidden để submit
+                inputColor.value = color;
+
+                // Highlight ô màu được chọn
+                colorEls.forEach(c => c.classList.remove('swatch_active'));
+                el.classList.add('swatch_active');
+            });
+        });
+
+        // Size selection
+        sizeEls.forEach(el => {
+            el.addEventListener("change", function () {
+                selectedSizeEl.textContent = el.value;
+                inputSize.value = el.value; // set value để gửi form
+
+                document.querySelectorAll('.btn-size').forEach(label => label.classList.remove('size_active'));
+                this.closest('.btn-size').classList.add('size_active');
+            });
+        });
+    });
+
+
+    document.querySelectorAll('input[name="size"]').forEach(input => {
+        input.addEventListener('change', function () {
+            document.getElementById('selectedSize').textContent = this.value;
+
+            // Xóa trạng thái chọn cũ
+            document.querySelectorAll('.btn-size').forEach(label => {
+                label.classList.remove('active');
+            });
+
+            // Thêm class active cho label đang chọn
+            this.closest('.btn-size').classList.add('active');
+        });
+    });
+
+    document.querySelectorAll('.swatch-color input').forEach(input => {
+        input.addEventListener('change', function () {
+            document.querySelectorAll('.swatch-color').forEach(s => s.classList.remove('swatch_active'));
+            this.parentElement.classList.add('swatch_active');
+        });
+    });
+
+    // Size
+    document.querySelectorAll('.btn-size input').forEach(input => {
+        input.addEventListener('change', function () {
+            document.querySelectorAll('.btn-size').forEach(b => b.classList.remove('size_active'));
+            this.parentElement.classList.add('size_active');
+        });
+    });
+</script>
