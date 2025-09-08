@@ -123,7 +123,8 @@
 <div class="row">
     <div class="row">
         <div class="col-lg-7">
-            <div class="swiper-container">
+            <!-- Swiper chính -->
+            <div class="swiper-container gallery-top">
                 <div class="swiper-wrapper">
                     {{-- Ảnh chính --}}
                     <div class="swiper-slide product-single__image-item">
@@ -131,42 +132,50 @@
                             width="674" height="674" alt="{{ $product->name }}" />
                         <a data-fancybox="gallery" href="{{ asset('uploads/products') }}/{{ $product->image }}"
                             data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg width="16" height="16" viewBox="0 0 16 16">
                                 <use href="#icon_zoom" />
                             </svg>
                         </a>
                     </div>
 
-                    {{-- Các ảnh gallery --}}
+                    {{-- Gallery phụ --}}
                     @foreach (explode(',', $product->images) as $gimg)
                         <div class="swiper-slide product-single__image-item">
                             <img loading="lazy" class="h-auto" src="{{ asset('uploads/products') }}/{{ $gimg }}" width="674"
                                 height="674" alt="" />
                             <a data-fancybox="gallery" href="{{ asset('uploads/products') }}/{{ $gimg }}"
                                 data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg width="16" height="16" viewBox="0 0 16 16">
                                     <use href="#icon_zoom" />
                                 </svg>
                             </a>
                         </div>
                     @endforeach
                 </div>
+                <!-- Nút điều hướng -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
 
-                {{-- Nút điều hướng --}}
-                <div class="swiper-button-prev">
-                    <svg width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_prev_sm" />
-                    </svg>
-                </div>
-                <div class="swiper-button-next">
-                    <svg width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg">
-                        <use href="#icon_next_sm" />
-                    </svg>
+            <!-- Swiper thumbnail -->
+            <div class="swiper-container gallery-thumbs mt-3">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img loading="lazy" class="h-auto"
+                            src="{{ asset('uploads/products/thumbnails') }}/{{ $product->image }}" width="104"
+                            height="104" alt="{{ $product->name }}" />
+                    </div>
+                    @foreach (explode(',', $product->images) as $gimg)
+                        <div class="swiper-slide">
+                            <img loading="lazy" class="h-auto" src="{{ asset('uploads/products/thumbnails') }}/{{ $gimg }}"
+                                width="104" height="104" alt="" />
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
+
+
 
         <div class="col-lg-5 ">
             <div class="d-flex justify-content-between mb-4 pb-md-2">
@@ -234,13 +243,13 @@
                                 @foreach($colors as $color)
                                     <a href="javascript:void(0)" class="swatch-color js-filter" data-color="{{ $color }}"
                                         title="{{ ucfirst($color) }}"
-                                        style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; background-color: {{ $color }};">
+                                        style="width:28px; height:28px; border-radius:50%; border:1px solid #ccc; color: {{ $color }};">
                                     </a>
                                 @endforeach
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold d-block">
-                                    Size: <span id="selectedSize">None</span>
+                                    Size: <span id="selectedSizeText">None</span>
                                 </label>
                                 <div class="d-flex gap-2 flex-wrap">
                                     @foreach($sizes as $size)
@@ -261,6 +270,7 @@
                                 <button type="submit" class="btn btn-primary btn-addtocart" data-aside="cartDrawer">Add
                                     To Cart</button>
                             </div>
+
                             <input type="hidden" name="id" value="{{$product->id}}" />
                             <input type="hidden" name="name" value="{{$product->name}}" />
                             <input type="hidden" name="price"
@@ -361,79 +371,68 @@
 
 </div>
 <script>
-    var swiper = new Swiper('.swiper-container', {
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        loop: true
-    });
-
     document.addEventListener("DOMContentLoaded", function () {
+        // --- Swiper setup ---
+        var galleryThumbs = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+
+        var galleryTop = new Swiper('.gallery-top', {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            thumbs: {
+                swiper: galleryThumbs,
+            },
+        });
+
+        // --- Thumbnail click ---
+        document.querySelectorAll('.gallery-thumbs .swiper-slide').forEach((thumb, index) => {
+            thumb.addEventListener('click', function () {
+                galleryTop.slideToLoop(index);
+                document.querySelectorAll('.gallery-thumbs .swiper-slide')
+                    .forEach(t => t.classList.remove('thumb-active'));
+                this.classList.add('thumb-active');
+            });
+        });
+        document.querySelector('.gallery-thumbs .swiper-slide')?.classList.add('thumb-active');
+
+
+        // --- Xử lý chọn màu ---
         const colorEls = document.querySelectorAll(".swatch-color");
-        const sizeEls = document.querySelectorAll("input[name='size']");
-        const selectedColorEl = document.getElementById("selectedColor");
-        const selectedSizeEl = document.getElementById("selectedSize");
-
+        const selectedColorText = document.getElementById("selectedColorText");
         const inputColor = document.getElementById("inputColor");
-        const inputSize = document.getElementById("inputSize");
 
-        // Color selection
         colorEls.forEach(el => {
             el.addEventListener("click", function () {
-                const color = el.dataset.color;
-
-                // Hiển thị chữ màu thay vì ô trống
+                const color = this.dataset.color;
                 selectedColorText.textContent = color;
-
-                // Gán giá trị vào input hidden để submit
                 inputColor.value = color;
 
-                // Highlight ô màu được chọn
                 colorEls.forEach(c => c.classList.remove('swatch_active'));
                 el.classList.add('swatch_active');
             });
         });
 
-        // Size selection
+        // --- Xử lý chọn size ---
+        const sizeEls = document.querySelectorAll("input[name='size']");
+        const selectedSizeText = document.getElementById("selectedSizeText"); 
+        const inputSize = document.getElementById("inputSize");
+
         sizeEls.forEach(el => {
             el.addEventListener("change", function () {
-                selectedSizeEl.textContent = el.value;
-                inputSize.value = el.value; // set value để gửi form
+                selectedSizeText.textContent = this.value; 
+                inputSize.value = this.value;
 
-                document.querySelectorAll('.btn-size').forEach(label => label.classList.remove('size_active'));
+                document.querySelectorAll('.btn-size')
+                    .forEach(label => label.classList.remove('size_active'));
                 this.closest('.btn-size').classList.add('size_active');
             });
-        });
-    });
-
-
-    document.querySelectorAll('input[name="size"]').forEach(input => {
-        input.addEventListener('change', function () {
-            document.getElementById('selectedSize').textContent = this.value;
-
-            // Xóa trạng thái chọn cũ
-            document.querySelectorAll('.btn-size').forEach(label => {
-                label.classList.remove('active');
-            });
-
-            // Thêm class active cho label đang chọn
-            this.closest('.btn-size').classList.add('active');
-        });
-    });
-
-    document.querySelectorAll('.swatch-color input').forEach(input => {
-        input.addEventListener('change', function () {
-            document.querySelectorAll('.swatch-color').forEach(s => s.classList.remove('swatch_active'));
-            this.parentElement.classList.add('swatch_active');
-        });
-    });
-
-    // Size
-    document.querySelectorAll('.btn-size input').forEach(input => {
-        input.addEventListener('change', function () {
-            document.querySelectorAll('.btn-size').forEach(b => b.classList.remove('size_active'));
-            this.parentElement.classList.add('size_active');
         });
     });
 </script>

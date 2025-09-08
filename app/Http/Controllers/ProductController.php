@@ -11,49 +11,49 @@ class ProductController extends Controller
         $product = Product::with('variants')->where('slug', $slug)->firstOrFail();
 
         $colors = $product->variants->pluck('color')->unique();
-        $sizes  = $product->variants->pluck('size')->unique();
+        $sizes = $product->variants->pluck('size')->unique();
 
         return view('details', compact('product', 'colors', 'sizes'));
     }
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'slug' => 'required|string|unique:products,slug',
-        'description' => 'required',
-        'variants' => 'required|array',
-        'variants.*.color' => 'required|string',
-        'variants.*.size' => 'required|string',
-        'variants.*.price' => 'nullable|numeric',
-        'variants.*.quantity' => 'nullable|integer|min:0',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|unique:products,slug',
+            'description' => 'required',
+            'variants' => 'required|array',
+            'variants.*.color' => 'required|string',
+            'variants.*.size' => 'required|string',
+            'variants.*.price' => 'nullable|numeric',
+            'variants.*.quantity' => 'nullable|integer|min:0',
+        ]);
 
-    $product = new Product();
-    $product->name = $request->name;
-    $product->slug = $request->slug;
-    $product->description = $request->description;
+        $product = new Product();
+        $product->name = $request->name;
+        $product->slug = $request->slug;
+        $product->description = $request->description;
 
-    // xử lý ảnh
-    if ($request->hasFile('image')) {
-        $product->image = $request->file('image')->store('products', 'public');
-    }
+        // xử lý ảnh
+        if ($request->hasFile('image')) {
+            $product->image = $request->file('image')->store('products', 'public');
+        }
 
-    $product->save();
+        $product->save();
 
-    // Lưu biến thể
-    foreach ($request->variants as $variant) {
-        $product->variants()->create($variant);
-    }
+        // Lưu biến thể
+        foreach ($request->variants as $variant) {
+            $product->variants()->create($variant);
+        }
 
-    return redirect()->route('admin.products')->with('success', 'Thêm sản phẩm thành công!');
+        return redirect()->route('admin.products')->with('success', 'Thêm sản phẩm thành công!');
     }
 
     public function quickView($id)
     {
         $product = Product::with('category')->findOrFail($id);
 
-        $colors = $product->colors ? explode(',', $product->colors) : [];
-        $sizes = $product->sizes ? explode(',', $product->sizes) : [];
+        $colors = $product->variants->pluck('color')->unique();
+        $sizes = $product->variants->pluck('size')->unique();
 
         return view('product.quick-view', compact('product', 'colors', 'sizes'));
     }
